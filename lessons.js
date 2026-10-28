@@ -35,5 +35,40 @@ window.LESSONS = [
         "code": "(a + b) * (abs(a - b) + 1) // 2"
       }
     ]
+  },
+  {
+    "id": "string-to-int",
+    "title": "문자열 → 숫자 변환",
+    "en": "String to Integer",
+    "category": "형 변환",
+    "icon": "⇄",
+    "color": "blue",
+    "summary": "int()는 숫자 문자열 앞의 +, - 부호를 자동으로 처리해요.",
+    "tags": [
+      "int()",
+      "문자열",
+      "정수 변환",
+      "부호"
+    ],
+    "concept": "파이썬의 int()는 숫자 문자열을 정수로 변환할 때, 앞에 있는 +, - 부호까지 자동으로 처리합니다. 부호를 확인하거나 따로 처리하는 조건문을 작성할 필요가 없어요.",
+    "conceptTitle": "핵심 정리",
+    "termsTitle": "사용법",
+    "terms": [
+      {
+        "code": "int(s)",
+        "description": "정수로 바꿀 숫자 문자열 s를 전달합니다."
+      },
+      {
+        "code": "+, -",
+        "description": "문자열 앞의 부호는 int()가 자동으로 처리합니다."
+      }
+    ],
+    "patterns": [
+      {
+        "title": "int()로 변환하기",
+        "description": "s는 변환할 숫자 문자열입니다.",
+        "code": "int(s)"
+      }
+    ]
   }
 ];

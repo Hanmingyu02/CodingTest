@@ -13,12 +13,12 @@
   function save() { try { localStorage.setItem('pynote-v1', JSON.stringify(state)); } catch { toast('저장 공간을 사용할 수 없어 이번 방문 동안만 기록됩니다.'); } }
   function route() { return location.hash.slice(1) || 'home'; }
   function highlight(code) {
-    const tokens = /("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|#[^\n]*|\b(?:from|import|for|in|if|else|elif|while|return|def|not|and|or|True|False|None|continue|break)\b|\b\d+\b|\b(?:print|range|len|sum|min|sorted|set|list|reversed|float|enumerate|abs)\b)/g;
+    const tokens = /("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|#[^\n]*|\b(?:from|import|for|in|if|else|elif|while|return|def|not|and|or|True|False|None|continue|break)\b|\b\d+\b|\b(?:print|range|len|sum|min|sorted|set|list|reversed|float|enumerate|abs|int)\b)/g;
     let result = '', last = 0;
     for (const match of code.matchAll(tokens)) {
       result += esc(code.slice(last, match.index));
       const token = match[0];
-      const cls = token[0] === '#' ? 'comment' : /^["']/.test(token) ? 'string' : /^\d/.test(token) ? 'number' : /^(print|range|len|sum|min|sorted|set|list|reversed|float|enumerate|abs)$/.test(token) ? 'function' : 'keyword';
+      const cls = token[0] === '#' ? 'comment' : /^["']/.test(token) ? 'string' : /^\d/.test(token) ? 'number' : /^(print|range|len|sum|min|sorted|set|list|reversed|float|enumerate|abs|int)$/.test(token) ? 'function' : 'keyword';
       result += `<span class="${cls}">${esc(token)}</span>`;
       last = match.index + token.length;
     }
@@ -29,7 +29,7 @@
   }
   function card(l, index) {
     const done = state.completed.includes(l.id), bookmarked = state.bookmarks.includes(l.id);
-    return `<article class="topic-card ${l.color}"><div class="card-top"><a class="topic-icon" href="#${l.id}" aria-label="${l.title} 학습">${l.icon}</a><span class="level">${l.category}</span><button class="bookmark ${bookmarked ? 'selected' : ''}" data-bookmark="${l.id}" aria-label="${l.title} 북마크" aria-pressed="${bookmarked}">${bookmarked ? '★' : '☆'}</button></div><a class="card-link" href="#${l.id}"><span class="card-index">NOTE ${String(index + 1).padStart(2, '0')} <span>· ${l.en}</span></span><h3>${l.title}</h3><p>${l.summary}</p><div class="tags">${l.tags.slice(0,2).map(tag=>`<span># ${tag}</span>`).join('')}</div><div class="card-bottom"><span>${done ? '<span class="done-text">✓ 학습 완료</span>' : `${l.category} · 공식 ${l.patterns.length}개`}</span><span class="card-arrow">↗</span></div></a></article>`;
+    return `<article class="topic-card ${l.color}"><div class="card-top"><a class="topic-icon" href="#${l.id}" aria-label="${l.title} 학습">${l.icon}</a><span class="level">${l.category}</span><button class="bookmark ${bookmarked ? 'selected' : ''}" data-bookmark="${l.id}" aria-label="${l.title} 북마크" aria-pressed="${bookmarked}">${bookmarked ? '★' : '☆'}</button></div><a class="card-link" href="#${l.id}"><span class="card-index">NOTE ${String(index + 1).padStart(2, '0')} <span>· ${l.en}</span></span><h3>${l.title}</h3><p>${l.summary}</p><div class="tags">${l.tags.slice(0,2).map(tag=>`<span># ${tag}</span>`).join('')}</div><div class="card-bottom"><span>${done ? '<span class="done-text">✓ 학습 완료</span>' : `${l.category} · 코드 ${l.patterns.length}개`}</span><span class="card-arrow">↗</span></div></a></article>`;
   }
   function dashboard(bookmarks = false) {
     const count = state.completed.length, percent = Math.round(count / lessons.length * 100);
@@ -41,7 +41,7 @@
   }
   function detail(l) {
     const done = state.completed.includes(l.id), bookmarked = state.bookmarks.includes(l.id);
-    $('#main').innerHTML = `<div class="lesson-page"><a class="back-link" href="#home">← 전체 노트</a><div class="lesson-header"><div><div class="eyebrow muted">${esc(l.category)} / ${esc(l.en.toUpperCase())}</div><h1>${esc(l.title)}</h1><p>${esc(l.summary)}</p><div class="lesson-meta"><span class="level">${esc(l.category)}</span><span>Python 3</span></div></div><button class="secondary-button" data-bookmark="${l.id}" aria-pressed="${bookmarked}">${bookmarked ? '★ 북마크 저장됨' : '☆ 북마크'}</button></div><section class="concept-panel"><h2>공식 정리</h2><p>${esc(l.concept)}</p></section><section>${l.patterns.map((p,i)=>`<article class="pattern"><h3>${esc(p.title)}</h3><p>${esc(p.description)}</p>${codeBlock(p.code,p.output,`${l.id}:${i}`)}</article>`).join('')}</section><section class="exercise"><h2>공식의 각 부분</h2><dl class="formula-terms">${l.terms.map(term=>`<dt><code>${esc(term.code)}</code></dt><dd>${esc(term.description)}</dd>`).join('')}</dl></section><div class="complete-panel"><div><h3>${done ? '확인한 노트예요.' : '공식을 이해했나요?'}</h3><p>확인한 내용은 학습 완료로 표시해 둘 수 있어요.</p></div><button class="${done ? 'secondary-button' : 'primary-button'}" data-complete="${l.id}" aria-pressed="${done}">${done ? '✓ 학습 완료 취소' : '학습 완료하기 ✓'}</button></div></div>`;
+    $('#main').innerHTML = `<div class="lesson-page"><a class="back-link" href="#home">← 전체 노트</a><div class="lesson-header"><div><div class="eyebrow muted">${esc(l.category)} / ${esc(l.en.toUpperCase())}</div><h1>${esc(l.title)}</h1><p>${esc(l.summary)}</p><div class="lesson-meta"><span class="level">${esc(l.category)}</span><span>Python 3</span></div></div><button class="secondary-button" data-bookmark="${l.id}" aria-pressed="${bookmarked}">${bookmarked ? '★ 북마크 저장됨' : '☆ 북마크'}</button></div><section class="concept-panel"><h2>${esc(l.conceptTitle || '공식 정리')}</h2><p>${esc(l.concept)}</p></section><section>${l.patterns.map((p,i)=>`<article class="pattern"><h3>${esc(p.title)}</h3><p>${esc(p.description)}</p>${codeBlock(p.code,p.output,`${l.id}:${i}`)}</article>`).join('')}</section><section class="exercise"><h2>${esc(l.termsTitle || '공식의 각 부분')}</h2><dl class="formula-terms">${l.terms.map(term=>`<dt><code>${esc(term.code)}</code></dt><dd>${esc(term.description)}</dd>`).join('')}</dl></section><div class="complete-panel"><div><h3>${done ? '확인한 노트예요.' : '내용을 이해했나요?'}</h3><p>확인한 내용은 학습 완료로 표시해 둘 수 있어요.</p></div><button class="${done ? 'secondary-button' : 'primary-button'}" data-complete="${l.id}" aria-pressed="${done}">${done ? '✓ 학습 완료 취소' : '학습 완료하기 ✓'}</button></div></div>`;
   }
   function render() {
     const id = route(), l = lessons.find(l => l.id === id);
