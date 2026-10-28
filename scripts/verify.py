@@ -7,7 +7,7 @@ result = subprocess.run(
     ['node', '-e', 'global.window={}; require("./lessons.js"); console.log(JSON.stringify(window.LESSONS));'],
     cwd=ROOT, capture_output=True, text=True, check=True)
 lessons = json.loads(result.stdout)
-assert [lesson['id'] for lesson in lessons] == ['interval-sum', 'string-to-int']
+assert [lesson['id'] for lesson in lessons] == ['interval-sum', 'string-to-int', 'list-insert-append']
 assert lessons[0]['category'] == '수학'
 formula = lessons[0]['patterns'][0]['code']
 assert formula == '(a + b) * (abs(a - b) + 1) // 2'
@@ -27,3 +27,14 @@ for text, expected in [('12', 12), ('+12', 12), ('-12', -12), ('+0', 0), ('-0', 
     actual = eval(conversion['patterns'][0]['code'], {'__builtins__': {}, 'int': int}, {'s': text})
     assert actual == expected
 print('PASS: int(s) converts positive, negative and zero strings with optional signs')
+
+addition = lessons[2]
+assert addition['category'] == '배열'
+for values in ([], [2, 3]):
+    front = {'배열이름': values.copy(), '값': 1}
+    exec(addition['patterns'][0]['code'], {'__builtins__': {}}, front)
+    assert front['배열이름'] == [1] + values
+    back = {'배열이름': values.copy(), '값': 1}
+    exec(addition['patterns'][1]['code'], {'__builtins__': {}}, back)
+    assert back['배열이름'] == values + [1]
+print('PASS: insert(0, 값) prepends and append(값) appends to empty and nonempty lists')

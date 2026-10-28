@@ -70,5 +70,46 @@ window.LESSONS = [
         "code": "int(s)"
       }
     ]
+  },
+  {
+    "id": "list-insert-append",
+    "title": "배열 앞뒤에 원소 추가",
+    "en": "Insert & Append",
+    "category": "배열",
+    "icon": "[ ]",
+    "color": "green",
+    "summary": "맨 앞에는 insert(0, 값), 맨 뒤에는 append(값)을 사용해요.",
+    "tags": [
+      "배열",
+      "리스트",
+      "insert",
+      "append",
+      "원소 추가"
+    ],
+    "concept": "파이썬 리스트(배열)의 맨 앞에 값을 추가하려면 배열이름.insert(0, 값)을 사용합니다. 맨 뒤에 값을 추가하려면 배열이름.append(값)을 사용해요.",
+    "conceptTitle": "핵심 정리",
+    "termsTitle": "사용법",
+    "terms": [
+      {
+        "code": "insert(0, 값)",
+        "description": "인덱스 0, 즉 배열의 맨 앞에 값을 추가합니다."
+      },
+      {
+        "code": "append(값)",
+        "description": "배열의 맨 뒤에 값을 추가합니다."
+      }
+    ],
+    "patterns": [
+      {
+        "title": "맨 앞에 추가",
+        "description": "배열이름은 값을 추가할 리스트입니다.",
+        "code": "배열이름.insert(0, 값)"
+      },
+      {
+        "title": "맨 뒤에 추가",
+        "description": "append에 추가할 값을 전달합니다.",
+        "code": "배열이름.append(값)"
+      }
+    ]
   }
 ];
