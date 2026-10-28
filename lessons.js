@@ -1,5 +1,119 @@
 // Each example is standalone Python 3, with its expected standard output.
 window.LESSONS = [
+{
+  "id": "if",
+  "title": "if문과 조건 분기",
+  "en": "If Statements",
+  "icon": "?",
+  "color": "orange",
+  "level": "입문",
+  "minutes": 12,
+  "summary": "조건에 따라 다른 코드를 실행하고, 프로그램의 흐름을 나눠요.",
+  "tags": [
+    "if문",
+    "elif",
+    "else",
+    "조건문",
+    "비교 연산자"
+  ],
+  "concept": "if 조건: 아래에 들여쓴 코드는 조건이 참일 때만 실행돼요. 다른 조건은 elif, 나머지 경우는 else로 처리합니다. if·elif·else는 위에서부터 확인해 처음 참인 분기 하나만 실행해요. 여러 조건을 각각 검사하려면 독립된 if문을 사용하세요. 비교에는 ==, !=, <, <=, >, >=를 쓰고, and·or·not으로 조건을 연결해요.",
+  "when": "점수에 따라 등급을 정하거나, 좌표 범위를 검사하거나, 특정 조건을 만족하는 데이터만 처리할 때 사용해요.",
+  "complexity": "예제의 고정된 개수의 비교 O(1) · 조건식 자체가 탐색이라면 비용이 달라져요.",
+  "caution": "조건 뒤에 콜론(:)을 쓰고 본문은 공백 4칸으로 들여쓰세요. =는 대입, ==는 같은지 비교하는 연산자예요. if 90 <= score <= 100처럼 범위를 연결할 수도 있어요.",
+  "patterns": [
+    {
+      "title": "01. if · elif · else로 등급 나누기",
+      "description": "높은 점수부터 확인해야 낮은 점수 조건에 먼저 걸리지 않아요. else에는 조건을 쓰지 않습니다.",
+      "code": "score = 85\n\nif score >= 90:\n    print(\"A등급\")\nelif score >= 80:\n    print(\"B등급\")\nelse:\n    print(\"더 연습해 봐요\")",
+      "output": "B등급"
+    },
+    {
+      "title": "02. and · or · not으로 조건 연결하기",
+      "description": "and는 둘 다 참, or는 하나라도 참, not은 참과 거짓을 뒤집어요.",
+      "code": "number = 8\n\nif number > 0 and number % 2 == 0:\n    print(\"양수이면서 짝수\")\n\nif number < 0 or number > 5:\n    print(\"음수이거나 5보다 큼\")\n\nif not number == 0:\n    print(\"0이 아님\")",
+      "output": "양수이면서 짝수\n음수이거나 5보다 큼\n0이 아님"
+    }
+  ],
+  "exercise": "number가 양수면 \"양수\", 0이면 \"0\", 음수면 \"음수\"를 출력하세요. number = -3으로 확인해 보세요.",
+  "answer": "number = -3\nif number > 0:\n    print(\"양수\")\nelif number == 0:\n    print(\"0\")\nelse:\n    print(\"음수\")",
+  "answerOutput": "음수"
+},
+{
+  "id": "for",
+  "title": "for문과 반복",
+  "en": "For Loops",
+  "icon": "↻",
+  "color": "green",
+  "level": "입문",
+  "minutes": 15,
+  "summary": "리스트나 숫자 범위의 원소를 하나씩 꺼내 같은 작업을 반복해요.",
+  "tags": [
+    "for문",
+    "반복문",
+    "range",
+    "enumerate",
+    "continue"
+  ],
+  "concept": "for 변수 in 반복할 대상: 형태로 작성해요. 리스트·문자열의 원소를 하나씩 꺼내 변수에 넣고, 들여쓴 본문을 실행합니다. range(stop)은 0부터 stop 직전까지, range(start, stop, step)은 시작·끝·간격을 지정해요. 끝값은 포함하지 않습니다. 인덱스와 값이 모두 필요하면 enumerate를 사용하세요.",
+  "when": "모든 원소를 확인하거나, 정해진 횟수만큼 계산하거나, 합계와 개수를 누적할 때 사용해요.",
+  "complexity": "본문이 O(1)이면 N회 반복 O(N) · N × M 중첩 반복 O(N × M)",
+  "caution": "range(1, 6)은 1부터 5까지예요. continue는 이번 반복의 나머지를 건너뛰고 다음 원소로 이동합니다. break는 가장 안쪽 반복문을 종료해요. 반복 중인 리스트의 원소를 직접 삭제하는 방식은 피하세요.",
+  "patterns": [
+    {
+      "title": "01. range로 1부터 5까지 합 구하기",
+      "description": "total에 현재 숫자를 더해 누적해요. range(1, 6)의 끝값 6은 포함되지 않아요.",
+      "code": "total = 0\nfor number in range(1, 6):\n    total += number\n\nprint(total)\nprint(list(range(5, 0, -1)))  # 음수 간격으로 역순 반복",
+      "output": "15\n[5, 4, 3, 2, 1]"
+    },
+    {
+      "title": "02. enumerate와 continue로 원소 걸러내기",
+      "description": "인덱스와 값을 함께 꺼내고, 홀수는 건너뛴 뒤 짝수만 출력해요.",
+      "code": "nums = [3, 8, 5, 2]\n\nfor index, value in enumerate(nums):\n    if value % 2 != 0:\n        continue\n    print(index, value)",
+      "output": "1 8\n3 2"
+    }
+  ],
+  "exercise": "for문과 range를 사용해 1부터 10까지의 숫자 중 짝수의 합을 출력해 보세요.",
+  "answer": "total = 0\nfor number in range(1, 11):\n    if number % 2 == 0:\n        total += number\nprint(total)",
+  "answerOutput": "30"
+},
+{
+  "id": "while",
+  "title": "while문과 반복 제어",
+  "en": "While Loops",
+  "icon": "⟳",
+  "color": "blue",
+  "level": "입문",
+  "minutes": 15,
+  "summary": "조건이 참인 동안 반복하고, 원하는 순간에 멈추는 방법을 익혀요.",
+  "tags": [
+    "while문",
+    "반복문",
+    "break",
+    "무한 루프",
+    "종료 조건"
+  ],
+  "concept": "while 조건:은 반복을 시작하기 전에 조건을 확인하고, 참인 동안 들여쓴 본문을 실행해요. 조건이 처음부터 거짓이면 한 번도 실행하지 않습니다. 횟수가 정해졌다면 for, 상태가 특정 조건에 도달할 때까지 반복하려면 while이 편리해요. 본문에서 상태를 갱신하거나 break로 종료해야 합니다.",
+  "when": "목표값에 도달할 때까지 누적 계산하거나, 큐가 빌 때까지 처리하거나, 특정 종료 값을 만날 때 사용해요.",
+  "complexity": "본문이 O(1)이면 K회 반복 O(K) · 반복 횟수를 종료 조건으로 분석해요.",
+  "caution": "조건에 영향을 주는 변수를 갱신하지 않으면 무한 반복할 수 있어요. continue를 사용할 때도 갱신을 빠뜨리지 마세요. while True를 쓸 때는 반드시 도달 가능한 종료 조건을 두세요.",
+  "patterns": [
+    {
+      "title": "01. 조건과 상태 갱신으로 카운트다운",
+      "description": "매 반복마다 count를 줄여서 언젠가 조건이 거짓이 되도록 만들어요.",
+      "code": "count = 3\n\nwhile count > 0:\n    print(count)\n    count -= 1\n\nprint(\"시작!\")",
+      "output": "3\n2\n1\n시작!"
+    },
+    {
+      "title": "02. break로 목표에 도달하면 멈추기",
+      "description": "자연수를 차례로 더하다 합이 10 이상이면 가장 안쪽 반복문을 종료해요.",
+      "code": "number = 1\ntotal = 0\n\nwhile True:\n    total += number\n    if total >= 10:\n        break\n    number += 1\n\nprint(number)\nprint(total)",
+      "output": "4\n10"
+    }
+  ],
+  "exercise": "while문을 사용해 1부터 자연수를 더하면서 합이 20 이상이 되는 첫 숫자와 그때의 합을 출력해 보세요.",
+  "answer": "number = 0\ntotal = 0\nwhile total < 20:\n    number += 1\n    total += number\nprint(number, total)",
+  "answerOutput": "6 21"
+},
   {
     id: 'array', title: '배열과 리스트', en: 'Array & List', icon: '[ ]', color: 'green', level: '입문', minutes: 12,
     summary: '여러 데이터를 순서대로 담고, 원하는 값에 빠르게 접근해요.', tags: ['인덱싱', '슬라이싱', '누적 합'],

@@ -15,3 +15,8 @@
 .section-heading p,.welcome>p{color:#758369}
 .label-bottom{bottom:-12px}
 @media(max-width:520px){.topic-card p{font-size:12px}}
+
+/* Keep all learning topics reachable on short screens. */
+.sidebar{overflow-y:auto}
+.sidebar>*,.sidebar-bottom{flex-shrink:0}
+.sidebar-bottom{margin-top:auto}

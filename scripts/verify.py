@@ -8,8 +8,8 @@ result = subprocess.run(
     ['node', '-e', 'global.window={}; require("./lessons.js"); console.log(JSON.stringify(window.LESSONS));'],
     cwd=ROOT, capture_output=True, text=True, check=True)
 lessons = json.loads(result.stdout)
-assert len(lessons) == 8
-assert len({lesson['id'] for lesson in lessons}) == 8
+assert len(lessons) == 11
+assert len({lesson['id'] for lesson in lessons}) == 11
 count = 0
 for lesson in lessons:
     examples = [(p['code'], p['output']) for p in lesson['patterns']]
