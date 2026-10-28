@@ -1,23 +1,21 @@
-"""Run every displayed Python example and compare actual output."""
+"""Verify the user-provided interval-sum formula, including edge cases."""
 from pathlib import Path
 import json
 import subprocess
-import sys
 ROOT = Path(__file__).resolve().parents[1]
 result = subprocess.run(
     ['node', '-e', 'global.window={}; require("./lessons.js"); console.log(JSON.stringify(window.LESSONS));'],
     cwd=ROOT, capture_output=True, text=True, check=True)
 lessons = json.loads(result.stdout)
-assert len(lessons) == 11
-assert len({lesson['id'] for lesson in lessons}) == 11
+assert [lesson['id'] for lesson in lessons] == ['interval-sum']
+assert lessons[0]['category'] == '수학'
+formula = lessons[0]['patterns'][0]['code']
+assert formula == '(a + b) * (abs(a - b) + 1) // 2'
 count = 0
-for lesson in lessons:
-    examples = [(p['code'], p['output']) for p in lesson['patterns']]
-    examples.append((lesson['answer'], lesson['answerOutput']))
-    for index, (code, expected) in enumerate(examples, 1):
-        actual = subprocess.run([sys.executable, '-I', '-c', code],
-                                capture_output=True, text=True, timeout=5, check=True)
-        assert actual.stdout.rstrip('\n') == expected, (
-            f'{lesson["id"]} example {index}: {actual.stdout!r} != {expected!r}')
+for a in range(-10, 11):
+    for b in range(-10, 11):
+        actual = eval(formula, {'__builtins__': {}, 'abs': abs}, {'a': a, 'b': b})
+        expected = sum(range(min(a, b), max(a, b) + 1))
+        assert actual == expected, (a, b, actual, expected)
         count += 1
-print(f'PASS: {count} Python examples across {len(lessons)} lessons')
+print(f'PASS: interval sum formula matches direct summation in {count} cases')

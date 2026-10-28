@@ -20,3 +20,5 @@
 .sidebar{overflow-y:auto}
 .sidebar>*,.sidebar-bottom{flex-shrink:0}
 .sidebar-bottom{margin-top:auto}
+
+.formula-terms{margin:15px 0 0}.formula-terms dt{font-size:13px;color:var(--green);margin-top:20px}.formula-terms dd{margin:6px 0 0;font-size:12px;color:var(--text);line-height:1.9}
