@@ -7,7 +7,7 @@ result = subprocess.run(
     ['node', '-e', 'global.window={}; require("./lessons.js"); console.log(JSON.stringify(window.LESSONS));'],
     cwd=ROOT, capture_output=True, text=True, check=True)
 lessons = json.loads(result.stdout)
-assert [lesson['id'] for lesson in lessons] == ['interval-sum', 'string-to-int', 'list-insert-append', 'digits-descending']
+assert [lesson['id'] for lesson in lessons] == ['interval-sum', 'string-to-int', 'list-insert-append', 'digits-descending', 'perfect-square']
 assert lessons[0]['category'] == '수학'
 formula = lessons[0]['patterns'][0]['code']
 assert formula == '(a + b) * (abs(a - b) + 1) // 2'
@@ -46,3 +46,22 @@ exec(digits['patterns'][0]['code'], namespace)
 for number, expected in [(118372, 873211), (0, 0), (1020, 2100), (333, 333), (7, 7)]:
     assert namespace['solution'](number) == expected
 print('PASS: user digit-sorting solution handles zero, repeated digits and embedded zeros')
+
+square = lessons[4]
+assert square['category'] == '수학'
+assert len(square['patterns']) == 2
+solutions = []
+for pattern in square['patterns']:
+    namespace = {}
+    exec(pattern['code'], namespace)
+    solutions.append(namespace['solution'])
+for number, expected in [(0, 1), (1, 4), (2, -1), (9, 16), (15, -1), (16, 25), (121, 144)]:
+    for solution in solutions:
+        assert solution(number) == expected
+assert type(solutions[0](9)) is float
+assert type(solutions[1](9)) is int
+root = 10 ** 100
+assert solutions[1](root * root) == (root + 1) ** 2
+assert solutions[1](root * root - 1) == -1
+assert solutions[1](root * root + 1) == -1
+print('PASS: both square-root solutions; return types and exact isqrt checks for large integers')

@@ -157,5 +157,58 @@ window.LESSONS = [
         "code": "def solution(n):\n    strnum = list(str(n))\n    strnum.sort(reverse=True)\n    answer = int(''.join(strnum))\n    return answer"
       }
     ]
+  },
+  {
+    "id": "perfect-square",
+    "title": "정수 제곱근 판별",
+    "en": "Perfect Square Check",
+    "category": "수학",
+    "icon": "√",
+    "color": "blue",
+    "summary": "n이 완전제곱수이면 다음 정수의 제곱을, 아니면 -1을 반환해요.",
+    "tags": [
+      "제곱근",
+      "완전제곱수",
+      "isqrt",
+      "math",
+      "n**0.5"
+    ],
+    "concept": "0 이상의 정수 n이 어떤 정수의 제곱인지 확인하는 두 풀이입니다. 완전제곱수이면 그 제곱근에 1을 더한 수의 제곱을 반환하고, 아니면 -1을 반환합니다.",
+    "conceptTitle": "핵심 정리",
+    "termsTitle": "두 풀이의 핵심과 차이",
+    "terms": [
+      {
+        "code": "n**0.5",
+        "description": "n의 제곱근을 부동소수점 수로 계산합니다."
+      },
+      {
+        "code": "int(n**0.5) == n**0.5",
+        "description": "제곱근을 정수로 변환한 값과 비교해 정수인지 확인합니다. 매우 큰 정수에서는 부동소수점 정밀도 때문에 잘못 판별할 수 있습니다."
+      },
+      {
+        "code": "((n**0.5)+1) ** 2",
+        "description": "제곱근에 1을 더한 뒤 제곱합니다. 첫 번째 풀이의 이 반환값은 float이며, 제곱수가 아니면 정수 -1을 반환합니다."
+      },
+      {
+        "code": "x = isqrt(n)",
+        "description": "math.isqrt()는 제곱근의 소수 부분을 버린 값을 정수로 정확하게 구합니다. 정수 연산을 사용하므로 부동소수점 정밀도 문제를 피합니다."
+      },
+      {
+        "code": "x * x == n",
+        "description": "구한 정수 x를 다시 제곱해 n과 같으면 완전제곱수입니다. 두 번째 풀이는 (x + 1) ** 2 또는 -1을 모두 int로 반환합니다."
+      }
+    ],
+    "patterns": [
+      {
+        "title": "풀이 1. n**0.5로 제곱근 계산",
+        "description": "제곱근이 정수인지 비교하는 방식입니다. 주신 코드를 그대로 정리했습니다.",
+        "code": "def solution(n):\n    answer = 0\n    if(int(n**0.5) == n**0.5):\n        answer =((n**0.5)+1) ** 2\n    else:\n        answer = -1\n    return answer"
+      },
+      {
+        "title": "풀이 2. math.isqrt()로 정수 제곱근 계산",
+        "description": "정수 제곱근을 구하고, 다시 제곱해 완전제곱수인지 확인하는 방식입니다.",
+        "code": "from math import isqrt\n\ndef solution(n):\n    x = isqrt(n)\n\n    if x * x == n:\n        return (x + 1) ** 2\n    return -1"
+      }
+    ]
   }
 ];
