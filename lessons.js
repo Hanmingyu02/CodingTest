@@ -111,5 +111,51 @@ window.LESSONS = [
         "code": "배열이름.append(값)"
       }
     ]
+  },
+  {
+    "id": "digits-descending",
+    "title": "정수의 자릿수 내림차순 정렬",
+    "en": "Sort Digits in Descending Order",
+    "category": "정렬",
+    "icon": "↓",
+    "color": "purple",
+    "summary": "정수를 자릿수별로 나눈 뒤 큰 숫자부터 정렬하고, 다시 정수로 합쳐요.",
+    "tags": [
+      "정렬",
+      "내림차순",
+      "sort",
+      "reverse=True",
+      "join",
+      "문자열",
+      "정수"
+    ],
+    "concept": "0 이상의 정수 n을 문자열로 바꾸고, 각 자릿수를 리스트로 나눕니다. 자릿수를 내림차순으로 정렬한 뒤 하나의 문자열로 합치고, 정수로 변환해 반환하는 코드예요.",
+    "conceptTitle": "핵심 정리",
+    "termsTitle": "코드 처리 순서",
+    "terms": [
+      {
+        "code": "strnum = list(str(n))",
+        "description": "n을 문자열로 바꾼 뒤, 각 자릿수를 문자 원소로 갖는 리스트를 만듭니다."
+      },
+      {
+        "code": "strnum.sort(reverse=True)",
+        "description": "reverse=True로 리스트의 자릿수를 큰 숫자부터 내림차순으로 정렬합니다. sort()는 strnum 자체를 정렬합니다."
+      },
+      {
+        "code": "answer = int(''.join(strnum))",
+        "description": "''.join(strnum)으로 문자들을 빈 구분자로 이어 붙이고, int()로 정수로 변환합니다."
+      },
+      {
+        "code": "return answer",
+        "description": "정렬한 자릿수로 만든 정수를 반환합니다."
+      }
+    ],
+    "patterns": [
+      {
+        "title": "작성한 풀이",
+        "description": "0 이상의 정수 n의 각 자릿수를 내림차순으로 정렬합니다.",
+        "code": "def solution(n):\n    strnum = list(str(n))\n    strnum.sort(reverse=True)\n    answer = int(''.join(strnum))\n    return answer"
+      }
+    ]
   }
 ];

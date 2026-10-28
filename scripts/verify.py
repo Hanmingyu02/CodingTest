@@ -7,7 +7,7 @@ result = subprocess.run(
     ['node', '-e', 'global.window={}; require("./lessons.js"); console.log(JSON.stringify(window.LESSONS));'],
     cwd=ROOT, capture_output=True, text=True, check=True)
 lessons = json.loads(result.stdout)
-assert [lesson['id'] for lesson in lessons] == ['interval-sum', 'string-to-int', 'list-insert-append']
+assert [lesson['id'] for lesson in lessons] == ['interval-sum', 'string-to-int', 'list-insert-append', 'digits-descending']
 assert lessons[0]['category'] == '수학'
 formula = lessons[0]['patterns'][0]['code']
 assert formula == '(a + b) * (abs(a - b) + 1) // 2'
@@ -38,3 +38,11 @@ for values in ([], [2, 3]):
     exec(addition['patterns'][1]['code'], {'__builtins__': {}}, back)
     assert back['배열이름'] == values + [1]
 print('PASS: insert(0, 값) prepends and append(값) appends to empty and nonempty lists')
+
+digits = lessons[3]
+assert digits['category'] == '정렬'
+namespace = {}
+exec(digits['patterns'][0]['code'], namespace)
+for number, expected in [(118372, 873211), (0, 0), (1020, 2100), (333, 333), (7, 7)]:
+    assert namespace['solution'](number) == expected
+print('PASS: user digit-sorting solution handles zero, repeated digits and embedded zeros')
