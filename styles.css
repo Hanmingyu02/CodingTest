@@ -22,3 +22,14 @@
 .sidebar-bottom{margin-top:auto}
 
 .formula-terms{margin:15px 0 0}.formula-terms dt{font-size:13px;color:var(--green);margin-top:20px}.formula-terms dd{margin:6px 0 0;font-size:12px;color:var(--text);line-height:1.9}
+
+/* Group notes by their existing data structure or subject. */
+.category-group{margin-top:27px}
+.category-heading{display:flex;align-items:center;gap:10px;margin-bottom:13px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.category-heading h2{font-size:15px;margin:0;color:var(--green);letter-spacing:-.3px}
+.category-heading>span{font-size:10px;color:#8a967d}
+.nav-group{margin-bottom:17px}
+.nav-group-heading{display:flex;align-items:center;justify-content:space-between;margin:7px 13px 8px;font-size:10px;color:#6e805f;font-weight:700}
+.nav-group-heading>span{font-size:9px;color:#9aa68e;font-weight:500}
+.nav-group .nav-item{padding-top:9px;padding-bottom:9px;font-size:11px;gap:9px}
+@media(max-width:520px){.category-group{margin-top:23px}.category-heading h2{font-size:16px}.nav-group .nav-item{font-size:12px}}
