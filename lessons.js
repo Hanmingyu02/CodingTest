@@ -210,5 +210,54 @@ window.LESSONS = [
         "code": "from math import isqrt\n\ndef solution(n):\n    x = isqrt(n)\n\n    if x * x == n:\n        return (x + 1) ** 2\n    return -1"
       }
     ]
+  },
+  {
+    "id": "list-index",
+    "title": "배열에서 요소의 위치 찾기",
+    "en": "Find an Element Index",
+    "category": "배열",
+    "icon": "⌕",
+    "color": "green",
+    "summary": "index(값)으로 배열에서 원하는 요소의 위치를 찾아요.",
+    "tags": [
+      "배열",
+      "리스트",
+      "index",
+      "인덱스",
+      "위치 찾기",
+      "Kim"
+    ],
+    "concept": "파이썬 리스트에서 배열이름.index(값)을 사용하면 해당 값이 처음 나타나는 위치를 정수로 반환합니다. 인덱스는 0부터 시작해요. 주신 코드는 seoul에서 'Kim'의 위치를 찾아 문장으로 반환합니다.",
+    "conceptTitle": "핵심 정리",
+    "termsTitle": "코드 처리 순서와 사용법",
+    "terms": [
+      {
+        "code": "answer = '김서방은 '",
+        "description": "반환할 문장의 시작 부분을 저장합니다."
+      },
+      {
+        "code": "seoul.index('Kim')",
+        "description": "seoul에서 'Kim'이 처음 나타나는 인덱스를 찾습니다. 인덱스는 0부터 시작하며, 값이 없으면 ValueError가 발생합니다."
+      },
+      {
+        "code": "str(seoul.index('Kim'))",
+        "description": "찾은 위치는 정수이므로, 문장에 이어 붙이기 위해 str()로 문자열로 바꿉니다."
+      },
+      {
+        "code": "answer += str(seoul.index('Kim')) +'에 있다'",
+        "description": "기존 문장 뒤에 위치와 '에 있다'를 이어 붙입니다."
+      },
+      {
+        "code": "return answer",
+        "description": "완성된 문장을 반환합니다."
+      }
+    ],
+    "patterns": [
+      {
+        "title": "작성한 풀이",
+        "description": "seoul 리스트에 'Kim'이 들어 있을 때 사용하는 코드입니다.",
+        "code": "def solution(seoul):\n    answer = '김서방은 '\n    answer += str(seoul.index('Kim')) +'에 있다'\n    return answer"
+      }
+    ]
   }
 ];

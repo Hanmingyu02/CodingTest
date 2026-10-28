@@ -7,7 +7,7 @@ result = subprocess.run(
     ['node', '-e', 'global.window={}; require("./lessons.js"); console.log(JSON.stringify(window.LESSONS));'],
     cwd=ROOT, capture_output=True, text=True, check=True)
 lessons = json.loads(result.stdout)
-assert [lesson['id'] for lesson in lessons] == ['interval-sum', 'string-to-int', 'list-insert-append', 'digits-descending', 'perfect-square']
+assert [lesson['id'] for lesson in lessons] == ['interval-sum', 'string-to-int', 'list-insert-append', 'digits-descending', 'perfect-square', 'list-index']
 assert lessons[0]['category'] == '수학'
 formula = lessons[0]['patterns'][0]['code']
 assert formula == '(a + b) * (abs(a - b) + 1) // 2'
@@ -65,3 +65,17 @@ assert solutions[1](root * root) == (root + 1) ** 2
 assert solutions[1](root * root - 1) == -1
 assert solutions[1](root * root + 1) == -1
 print('PASS: both square-root solutions; return types and exact isqrt checks for large integers')
+
+index_note = lessons[5]
+assert index_note['category'] == '배열'
+namespace = {}
+exec(index_note['patterns'][0]['code'], namespace)
+for seoul, expected in [(['Kim'], '김서방은 0에 있다'), (['Jane', 'Kim'], '김서방은 1에 있다'), (['Kim', 'Kim'], '김서방은 0에 있다')]:
+    assert namespace['solution'](seoul) == expected
+try:
+    namespace['solution'](['Jane'])
+except ValueError:
+    pass
+else:
+    raise AssertionError('Missing value must raise ValueError as documented')
+print('PASS: list.index solution uses zero-based first-match position and raises ValueError when missing')
