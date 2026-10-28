@@ -7,7 +7,7 @@ result = subprocess.run(
     ['node', '-e', 'global.window={}; require("./lessons.js"); console.log(JSON.stringify(window.LESSONS));'],
     cwd=ROOT, capture_output=True, text=True, check=True)
 lessons = json.loads(result.stdout)
-assert [lesson['id'] for lesson in lessons] == ['interval-sum', 'string-to-int', 'list-insert-append', 'digits-descending', 'perfect-square', 'list-index']
+assert [lesson['id'] for lesson in lessons] == ['interval-sum', 'string-to-int', 'list-insert-append', 'digits-descending', 'perfect-square', 'list-index', 'list-remove-empty']
 assert lessons[0]['category'] == '수학'
 formula = lessons[0]['patterns'][0]['code']
 assert formula == '(a + b) * (abs(a - b) + 1) // 2'
@@ -79,3 +79,20 @@ except ValueError:
 else:
     raise AssertionError('Missing value must raise ValueError as documented')
 print('PASS: list.index solution uses zero-based first-match position and raises ValueError when missing')
+
+removal = lessons[6]
+assert removal['category'] == '배열'
+namespace = {}
+exec(removal['patterns'][0]['code'], namespace)
+for values, expected in [([4, 3, 2, 1], [4, 3, 2]), ([10], [-1]), ([1, 1, 2], [1, 2])]:
+    arr = values.copy()
+    result = namespace['solution'](arr)
+    assert result == expected
+    assert result is arr
+try:
+    namespace['solution']([])
+except ValueError:
+    pass
+else:
+    raise AssertionError('Initially empty input must raise ValueError as documented')
+print('PASS: minimum removal, first duplicate only, empty-result sentinel and original-list mutation')

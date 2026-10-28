@@ -259,5 +259,62 @@ window.LESSONS = [
         "code": "def solution(seoul):\n    answer = '김서방은 '\n    answer += str(seoul.index('Kim')) +'에 있다'\n    return answer"
       }
     ]
+  },
+  {
+    "id": "list-remove-empty",
+    "title": "배열 요소 제거와 빈 배열 확인",
+    "en": "Remove Elements & Check Empty Lists",
+    "category": "배열",
+    "icon": "−",
+    "color": "orange",
+    "summary": "remove()로 값을 제거하고, if not arr로 배열이 비어 있는지 확인해요.",
+    "tags": [
+      "배열",
+      "리스트",
+      "remove",
+      "min",
+      "빈 배열",
+      "if not arr"
+    ],
+    "concept": "주신 코드는 배열에서 가장 작은 값을 하나 제거합니다. 제거한 뒤 배열이 비어 있으면 -1을 추가하고, 결과 배열을 반환해요. remove(값)은 해당 값이 처음 나타나는 요소 하나를 제거하며, if not arr는 배열이 비어 있을 때 참이 됩니다.",
+    "conceptTitle": "핵심 정리",
+    "termsTitle": "코드 처리 순서와 사용법",
+    "terms": [
+      {
+        "code": "answer = []",
+        "description": "빈 리스트로 answer를 초기화합니다. 이후 answer = arr에서 arr를 가리키도록 바뀝니다."
+      },
+      {
+        "code": "arr.remove(min(arr))",
+        "description": "min(arr)로 최솟값을 구한 뒤, remove()로 그 값이 처음 나타나는 요소 하나를 제거합니다. 원본 arr가 직접 바뀝니다."
+      },
+      {
+        "code": "answer = arr",
+        "description": "리스트를 복사하는 것이 아니라, answer와 arr가 같은 리스트를 가리키게 합니다."
+      },
+      {
+        "code": "if not arr:",
+        "description": "arr가 빈 리스트 []이면 참, 요소가 있으면 거짓입니다. 이 코드에서는 최솟값을 제거한 뒤 비었는지 확인합니다."
+      },
+      {
+        "code": "answer.append(-1)",
+        "description": "제거 후 배열이 비어 있으면 -1을 추가합니다. answer와 arr는 같은 리스트이므로 arr에도 반영됩니다."
+      },
+      {
+        "code": "min(arr)",
+        "description": "처음부터 arr가 비어 있으면 min(arr)에서 ValueError가 발생합니다. 주신 코드는 원소가 하나 이상인 입력을 전제로 합니다."
+      },
+      {
+        "code": "return answer",
+        "description": "최솟값을 제거한 배열을 반환하며, 제거 후 비어 있던 경우에는 [-1]을 반환합니다."
+      }
+    ],
+    "patterns": [
+      {
+        "title": "작성한 풀이",
+        "description": "원소가 하나 이상인 배열에서 최솟값을 하나 제거한 뒤, 빈 배열이면 -1을 넣습니다.",
+        "code": "def solution(arr):\n    answer = []\n    arr.remove(min(arr))\n    answer = arr\n    if not arr:\n        answer.append(-1)\n    return answer"
+      }
+    ]
   }
 ];
