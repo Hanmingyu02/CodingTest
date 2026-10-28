@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f8f9f5">
+  <meta name="description" content="파이썬으로 차근차근 익히는 코딩테스트. 배열부터 DP까지, 핵심 개념과 바로 써보는 코드 패턴을 한곳에.">
+  <title>파이노트 — 나의 코딩테스트 노트</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./lessons.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">본문으로 건너뛰기</a>
+  <aside class="sidebar" aria-label="주 메뉴">
+    <a class="brand" href="#home"><span class="brand-icon">p<span>:</span></span>파이노트<span class="brand-dot">.</span></a>
+    <p class="workspace-label">MY LEARNING SPACE</p>
+    <nav>
+      <a class="nav-item active" href="#home" data-nav="home"><span>▦</span> 학습 대시보드</a>
+      <a class="nav-item" href="#bookmarks" data-nav="bookmarks"><span>♧</span> 내 북마크 <b id="bookmark-count">0</b></a>
+    </nav>
+    <div class="nav-heading">학습 노트 <span>8</span></div>
+    <nav id="topic-nav" aria-label="학습 주제"></nav>
+    <div class="sidebar-bottom"><span class="python-mark">Py</span><div>작은 한 줄이, 큰 실력으로.<small>오늘도 파이썬과 한 걸음</small></div></div>
+  </aside>
+  <div class="shell">
+    <header class="topbar">
+      <button class="icon-button menu-button" aria-label="메뉴 열기" aria-expanded="false">☰</button>
+      <span class="breadcrumb">내 학습 공간 <span>/</span> <strong id="breadcrumb">대시보드</strong></span>
+      <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="search" type="search" placeholder="어떤 개념이 궁금한가요?" aria-label="학습 노트 검색"><kbd>/</kbd></label>
+      <span class="avatar" title="나의 학습 공간">나</span>
+    </header>
+    <main id="main" tabindex="-1"></main>
+    <footer><a href="#home">파이노트.</a><span>매일 조금씩, 생각하는 힘을 기르는 곳.</span><span>Made for Python learners <span class="footer-dot">●</span></span></footer>
+  </div>
+  <div class="toast" role="status" aria-live="polite" id="toast"></div>
+</body>
+</html>
