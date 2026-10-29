@@ -7,7 +7,7 @@ result = subprocess.run(
     ['node', '-e', 'global.window={}; require("./lessons.js"); console.log(JSON.stringify(window.LESSONS));'],
     cwd=ROOT, capture_output=True, text=True, check=True)
 lessons = json.loads(result.stdout)
-assert [lesson['id'] for lesson in lessons] == ['interval-sum', 'string-to-int', 'list-insert-append', 'digits-descending', 'perfect-square', 'list-index', 'list-remove-empty', 'matrix-addition']
+assert [lesson['id'] for lesson in lessons] == ['interval-sum', 'string-to-int', 'list-insert-append', 'digits-descending', 'perfect-square', 'list-index', 'list-remove-empty', 'matrix-addition', 'string-isdigit']
 assert lessons[0]['category'] == '수학'
 formula = lessons[0]['patterns'][0]['code']
 assert formula == '(a + b) * (abs(a - b) + 1) // 2'
@@ -109,3 +109,18 @@ for arr1, arr2, expected in [([[1,2,3],[4,5,6]], [[6,5,4],[3,2,1]], [[7,7,7],[7,
     assert arr1 == before1 and arr2 == before2
     assert len({id(row) for row in result}) == len(result)
 print('PASS: matrix addition, rectangular shapes, empty inputs, independent rows and unchanged input matrices')
+
+digit_check = lessons[8]
+assert digit_check['category'] == '문자열'
+namespace = {}
+exec(digit_check['patterns'][0]['code'], namespace)
+for text, expected in [('1234', True), ('012345', True), ('123', False), ('12345', False), ('1234567', False), ('a234', False), ('+123', False), ('-123', False), ('1.23', False), ('12 3', False), ('', False), ('²²²²', True)]:
+    assert namespace['solution'](text) is expected
+assert ''.isdigit() is False
+try:
+    int('²²²²')
+except ValueError:
+    pass
+else:
+    raise AssertionError('isdigit does not guarantee int conversion')
+print('PASS: isdigit solution checks lengths, non-digit characters, empty strings and Unicode digit semantics')

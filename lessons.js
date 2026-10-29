@@ -373,5 +373,58 @@ window.LESSONS = [
         "code": "def solution(arr1, arr2):\n    answer = []\n    for i in range(0,len(arr1)):\n        row = []\n        for j in range(0,len(arr1[i])):\n            row.append(arr1[i][j] + arr2[i][j])\n        answer.append(row)\n    return answer"
       }
     ]
+  },
+  {
+    "id": "string-isdigit",
+    "title": "isdigit()으로 숫자 확인",
+    "en": "Check Digit Characters",
+    "category": "문자열",
+    "icon": "Aa",
+    "color": "blue",
+    "summary": "isdigit()으로 숫자 문자인지 확인하고, 길이가 4 또는 6인 문자열을 검사해요.",
+    "tags": [
+      "문자열",
+      "isdigit",
+      "숫자 확인",
+      "len",
+      "True",
+      "False"
+    ],
+    "concept": "문자열.isdigit()은 문자열이 비어 있지 않고 모든 문자가 숫자 문자일 때 True를 반환합니다. 주신 코드는 길이가 4 또는 6인지 먼저 검사하고, 각 문자가 숫자인지 하나씩 확인해요. 조건을 만족하지 않으면 바로 False를 반환하고, 끝까지 통과하면 True를 반환합니다.",
+    "conceptTitle": "핵심 정리",
+    "termsTitle": "isdigit() 사용법과 코드 흐름",
+    "terms": [
+      {
+        "code": "문자열.isdigit()",
+        "description": "문자열의 모든 문자가 숫자 문자이면 True, 아니면 False를 반환합니다. 빈 문자열도 False입니다. 부호, 소수점, 공백은 숫자 문자로 판정하지 않습니다."
+      },
+      {
+        "code": "if len(s) != 4 and len(s) != 6:",
+        "description": "길이가 4도 아니고 6도 아니면 False를 반환합니다. 즉, 길이가 4 또는 6인 경우에만 다음 검사로 넘어갑니다."
+      },
+      {
+        "code": "for i in range(0, len(s)):",
+        "description": "문자열의 처음부터 끝까지 인덱스 i로 순회합니다."
+      },
+      {
+        "code": "if not s[i].isdigit():",
+        "description": "s[i] 한 문자가 숫자가 아니면 not에 의해 조건이 참이 되어 바로 False를 반환합니다."
+      },
+      {
+        "code": "return True",
+        "description": "길이 조건을 만족하고, 모든 문자가 숫자일 때 True를 반환합니다."
+      },
+      {
+        "code": "isdigit()의 판정 범위",
+        "description": "ASCII 숫자 0~9 외에 일부 유니코드 숫자 문자도 True로 판정합니다. 따라서 True라고 해서 모두 int()로 변환할 수 있는 것은 아닙니다."
+      }
+    ],
+    "patterns": [
+      {
+        "title": "작성한 풀이",
+        "description": "길이가 4 또는 6이고, 모든 문자가 숫자인 문자열인지 확인합니다.",
+        "code": "def solution(s):\n    if len(s) != 4 and len(s) != 6:\n        return False\n\n    for i in range(0, len(s)):\n        if not s[i].isdigit():\n            return False\n\n    return True"
+      }
+    ]
   }
 ];
