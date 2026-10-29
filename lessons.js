@@ -993,5 +993,76 @@ window.LESSONS = [
         "description": "숫자가 아님을 나타내는 NaN. 자기 자신과 ==로 비교해도 False이므로 math.isnan()으로 확인합니다."
       }
     ]
+  },
+  {
+    "id": "dictionary-last-position",
+    "title": "딕셔너리로 문자별 최근 위치 기록",
+    "en": "Track Last Positions with a Dictionary",
+    "category": "딕셔너리",
+    "icon": "{ }",
+    "color": "purple",
+    "summary": "문자를 키, 가장 최근 인덱스를 값으로 저장해 같은 문자가 앞에 나온 위치와의 거리를 구해요.",
+    "tags": [
+      "딕셔너리",
+      "dict",
+      "키",
+      "값",
+      "in",
+      "not in",
+      "최근 위치",
+      "문자열"
+    ],
+    "concept": "딕셔너리(dict)는 키(key)와 값(value)을 한 쌍으로 저장하는 자료구조입니다. 리스트가 숫자 인덱스로 값을 찾는다면, 딕셔너리는 키로 값을 찾습니다. 이 코드에서는 문자를 키로, 그 문자가 가장 최근에 등장한 인덱스를 값으로 저장해요. 처음 나온 문자에는 -1을, 다시 나온 문자에는 현재 위치와 가장 가까운 이전 위치의 차이를 결과에 담습니다.",
+    "conceptTitle": "딕셔너리 개념",
+    "termsTitle": "키·값의 의미와 코드 흐름",
+    "terms": [
+      {
+        "code": "check ={}",
+        "description": "빈 딕셔너리를 만듭니다. check에는 문자와 그 문자의 최근 위치를 짝지어 저장합니다."
+      },
+      {
+        "code": "키와 값",
+        "description": "이 코드에서 키는 s[i]라는 문자, 값은 그 문자의 최근 인덱스입니다. 키는 중복되지 않으며, 같은 키에 다시 값을 넣으면 기존 값을 덮어씁니다. 문자열은 딕셔너리의 키로 사용할 수 있습니다."
+      },
+      {
+        "code": "for i in range(len(s)):",
+        "description": "문자열을 왼쪽부터 순서대로 순회합니다. i는 현재 위치, s[i]는 현재 문자입니다."
+      },
+      {
+        "code": "if s[i] not in check:",
+        "description": "현재 문자가 딕셔너리의 키로 없는지 확인합니다. in과 not in은 값이 아닌 키의 존재 여부를 검사합니다."
+      },
+      {
+        "code": "answer.append(-1)",
+        "description": "키가 없다면 지금까지 등장하지 않은 문자이므로 결과에 -1을 추가합니다."
+      },
+      {
+        "code": "check[s[i]]",
+        "description": "현재 문자를 키로 사용해 저장된 최근 인덱스를 조회합니다. 없는 키를 직접 조회하면 KeyError가 나지만, 이 코드에서는 키가 있는 else에서만 조회합니다. 저장된 인덱스가 0이어도 정상적으로 처리됩니다."
+      },
+      {
+        "code": "answer.append(i - check[s[i]])",
+        "description": "현재 위치에서 가장 최근에 등장한 위치를 빼, 앞에 있는 같은 문자와의 거리를 결과에 추가합니다."
+      },
+      {
+        "code": "check[s[i]] = i",
+        "description": "처음 본 키면 새로 저장하고, 이미 있는 키면 최근 위치를 현재 인덱스로 갱신합니다. 거리 계산이 끝난 뒤 갱신해야 이전 위치와 비교할 수 있습니다. if와 else 바깥에 있으므로 모든 문자에서 실행됩니다."
+      },
+      {
+        "code": "return answer",
+        "description": "문자마다 처음 등장했다면 -1, 다시 등장했다면 최근 같은 문자까지의 거리를 담은 리스트를 반환합니다. 빈 문자열이면 빈 리스트를 반환합니다."
+      },
+      {
+        "code": "조회·저장 비용",
+        "description": "딕셔너리의 키 확인·조회·갱신은 평균 O(1)입니다. 문자열 길이를 N, 서로 다른 문자 수를 U라고 하면 전체 시간은 평균 O(N), check의 공간은 O(U)이며 결과 리스트는 O(N) 공간을 사용합니다."
+      }
+    ],
+    "patterns": [
+      {
+        "title": "작성한 풀이",
+        "description": "딕셔너리에 문자별 최근 위치를 기록하며 이전에 나온 같은 문자와의 거리를 구합니다.",
+        "code": "def solution(s):\n    answer = []\n    check ={}\n\n    for i in range(len(s)):\n        if s[i] not in check:\n            answer.append(-1)\n        else:\n            answer.append(i - check[s[i]])\n\n        check[s[i]] = i\n\n    return answer"
+      }
+    ]
   }
 ];

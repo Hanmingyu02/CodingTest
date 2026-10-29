@@ -7,7 +7,7 @@ result = subprocess.run(
     ['node', '-e', 'global.window={}; require("./lessons.js"); console.log(JSON.stringify(window.LESSONS));'],
     cwd=ROOT, capture_output=True, text=True, check=True)
 lessons = json.loads(result.stdout)
-assert [lesson['id'] for lesson in lessons] == ['interval-sum', 'string-to-int', 'list-insert-append', 'digits-descending', 'perfect-square', 'list-index', 'list-remove-empty', 'matrix-addition', 'string-isdigit', 'list-last-element', 'gcd-lcm', 'math-functions']
+assert [lesson['id'] for lesson in lessons] == ['interval-sum', 'string-to-int', 'list-insert-append', 'digits-descending', 'perfect-square', 'list-index', 'list-remove-empty', 'matrix-addition', 'string-isdigit', 'list-last-element', 'gcd-lcm', 'math-functions', 'dictionary-last-position']
 assert lessons[0]['category'] == '수학'
 formula = lessons[0]['patterns'][0]['code']
 assert formula == '(a + b) * (abs(a - b) + 1) // 2'
@@ -157,3 +157,20 @@ for expression, expected in [('math.isqrt(15)', 3), ('math.ceil(-1.5)', -1), ('m
 assert type(math.pow(2, 3)) is float
 assert math.isnan(math.nan) and math.isinf(math.inf)
 print('PASS: gcd/lcm edge cases, complete Python 3.12 math reference (56 functions) and representative calculations')
+
+dictionary_note = lessons[12]
+assert dictionary_note['category'] == '딕셔너리'
+namespace = {}
+exec(dictionary_note['patterns'][0]['code'], namespace)
+for text, expected in [('', []), ('a', [-1]), ('aaaa', [-1,1,1,1]), ('banana', [-1,-1,-1,2,2,2]), ('abcba', [-1,-1,-1,2,4]), ('가나다가', [-1,-1,-1,3])]:
+    assert namespace['solution'](text) == expected
+from itertools import product
+for length in range(6):
+    for chars in product('ab', repeat=length):
+        text = ''.join(chars)
+        expected = []
+        for i, char in enumerate(text):
+            previous = text[:i].rfind(char)
+            expected.append(-1 if previous == -1 else i-previous)
+        assert namespace['solution'](text) == expected
+print('PASS: dictionary solution tracks the most recent position, including index zero, repeated characters and empty input')

@@ -52,3 +52,6 @@
 .function-table-wrap tr:last-child>*{border-bottom:0}
 .math-reference .constants-heading{margin-top:29px}
 @media(max-width:520px){.math-group summary{font-size:12px;padding:14px}.math-group summary>span{font-size:8px}.function-table-wrap th,.function-table-wrap td{padding:11px 12px;font-size:11px}.function-table-wrap th:first-child{width:42%}}
+/* Keep category names intact as more note groups are added. */
+.filters{flex-wrap:wrap}
+.filters button{white-space:nowrap}
