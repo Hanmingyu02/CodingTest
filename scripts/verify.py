@@ -7,7 +7,7 @@ result = subprocess.run(
     ['node', '-e', 'global.window={}; require("./lessons.js"); console.log(JSON.stringify(window.LESSONS));'],
     cwd=ROOT, capture_output=True, text=True, check=True)
 lessons = json.loads(result.stdout)
-assert [lesson['id'] for lesson in lessons] == ['interval-sum', 'string-to-int', 'list-insert-append', 'digits-descending', 'perfect-square', 'list-index', 'list-remove-empty', 'matrix-addition', 'string-isdigit']
+assert [lesson['id'] for lesson in lessons] == ['interval-sum', 'string-to-int', 'list-insert-append', 'digits-descending', 'perfect-square', 'list-index', 'list-remove-empty', 'matrix-addition', 'string-isdigit', 'list-last-element']
 assert lessons[0]['category'] == '수학'
 formula = lessons[0]['patterns'][0]['code']
 assert formula == '(a + b) * (abs(a - b) + 1) // 2'
@@ -124,3 +124,19 @@ except ValueError:
 else:
     raise AssertionError('isdigit does not guarantee int conversion')
 print('PASS: isdigit solution checks lengths, non-digit characters, empty strings and Unicode digit semantics')
+
+last_element = lessons[9]
+assert last_element['category'] == '배열'
+namespace = {}
+exec(last_element['patterns'][0]['code'], namespace)
+for values, expected in [([], []), ([1], [1]), ([1,1,3,3,0,1,1], [1,3,0,1]), ([0,0,0], [0]), ([-1,-1,2,-1], [-1,2,-1])]:
+    arr = values.copy()
+    assert namespace['solution'](arr) == expected
+    assert arr == values
+try:
+    [][-1]
+except IndexError:
+    pass
+else:
+    raise AssertionError('Last-element access on an empty list must raise IndexError')
+print('PASS: last-element comparison removes consecutive duplicates only and handles empty inputs')

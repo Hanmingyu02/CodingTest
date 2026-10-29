@@ -426,5 +426,62 @@ window.LESSONS = [
         "code": "def solution(s):\n    if len(s) != 4 and len(s) != 6:\n        return False\n\n    for i in range(0, len(s)):\n        if not s[i].isdigit():\n            return False\n\n    return True"
       }
     ]
+  },
+  {
+    "id": "list-last-element",
+    "title": "[-1]로 마지막 요소 접근",
+    "en": "Access the Last List Element",
+    "category": "배열",
+    "icon": "[ ]",
+    "color": "green",
+    "summary": "answer[-1]로 마지막 요소를 확인해 연속으로 같은 값이 추가되는 것을 막아요.",
+    "tags": [
+      "배열",
+      "리스트",
+      "[-1]",
+      "음수 인덱스",
+      "마지막 요소",
+      "연속 중복 제거"
+    ],
+    "concept": "리스트에서 [-1]은 뒤에서 첫 번째, 즉 마지막 요소에 접근하는 인덱스입니다. 주신 코드는 answer의 마지막 값과 현재 값 arr[i]를 비교해서, 서로 다를 때만 추가합니다. 따라서 순서를 유지하면서 연속으로 반복되는 값만 하나씩 남깁니다.",
+    "conceptTitle": "핵심 정리",
+    "termsTitle": "[-1]의 의미와 코드 흐름",
+    "terms": [
+      {
+        "code": "answer[-1]",
+        "description": "answer의 마지막 요소를 가져옵니다. 여기서 -1은 저장된 값이 아니라 뒤에서부터 세는 인덱스입니다."
+      },
+      {
+        "code": "answer = []",
+        "description": "결과를 담을 새 리스트를 준비합니다."
+      },
+      {
+        "code": "for i in range(0,len(arr)):",
+        "description": "입력 배열을 처음부터 끝까지 순서대로 확인합니다."
+      },
+      {
+        "code": "if i == 0:",
+        "description": "첫 번째 요소는 먼저 answer에 추가합니다. 덕분에 아래에서 answer[-1]에 접근할 때 answer가 비어 있지 않습니다."
+      },
+      {
+        "code": "if answer[-1] != arr[i]:",
+        "description": "마지막으로 추가한 값과 현재 값이 다를 때만 현재 값을 추가합니다. 첫 번째 반복에서도 이 조건을 검사하지만, 방금 넣은 값과 같으므로 두 번 추가하지 않습니다."
+      },
+      {
+        "code": "return answer",
+        "description": "연속된 중복만 제거한 리스트를 반환합니다. 사이에 다른 값이 있는 중복은 그대로 남으며, 입력이 빈 배열이면 반복 없이 빈 리스트를 반환합니다."
+      },
+      {
+        "code": "빈 리스트에서의 [-1]",
+        "description": "빈 리스트에 직접 [-1]로 접근하면 IndexError가 발생합니다. 주신 코드는 첫 요소를 먼저 넣고, 빈 입력에서는 반복문을 실행하지 않아 이 접근을 피합니다."
+      }
+    ],
+    "patterns": [
+      {
+        "title": "작성한 풀이",
+        "description": "마지막으로 추가한 값과 비교해 연속으로 같은 값이 들어가는 것을 막습니다.",
+        "code": "def solution(arr):\n    answer = []\n    for i in range(0,len(arr)):\n        if i == 0:\n            answer.append(arr[i])\n        if answer[-1] != arr[i]:\n            answer.append(arr[i])\n    return answer"
+      }
+    ]
   }
 ];
