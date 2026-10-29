@@ -7,7 +7,7 @@ result = subprocess.run(
     ['node', '-e', 'global.window={}; require("./lessons.js"); console.log(JSON.stringify(window.LESSONS));'],
     cwd=ROOT, capture_output=True, text=True, check=True)
 lessons = json.loads(result.stdout)
-assert [lesson['id'] for lesson in lessons] == ['interval-sum', 'string-to-int', 'list-insert-append', 'digits-descending', 'perfect-square', 'list-index', 'list-remove-empty', 'matrix-addition', 'string-isdigit', 'list-last-element']
+assert [lesson['id'] for lesson in lessons] == ['interval-sum', 'string-to-int', 'list-insert-append', 'digits-descending', 'perfect-square', 'list-index', 'list-remove-empty', 'matrix-addition', 'string-isdigit', 'list-last-element', 'gcd-lcm', 'math-functions']
 assert lessons[0]['category'] == '수학'
 formula = lessons[0]['patterns'][0]['code']
 assert formula == '(a + b) * (abs(a - b) + 1) // 2'
@@ -140,3 +140,20 @@ except IndexError:
 else:
     raise AssertionError('Last-element access on an empty list must raise IndexError')
 print('PASS: last-element comparison removes consecutive duplicates only and handles empty inputs')
+
+import math
+gcd_note = lessons[10]
+namespace = {}
+exec(gcd_note['patterns'][0]['code'], namespace)
+for n, m, expected in [(12, 18, [6, 36]), (7, 5, [1, 35]), (0, 5, [5, 0]), (0, 0, [0, 0]), (-12, 18, [6, 36])]:
+    assert namespace['solution'](n, m) == expected
+reference = lessons[11]
+functions = [item['name'] for group in reference['functionGroups'] for item in group['items']]
+actual_functions = {name for name in dir(math) if not name.startswith('_') and callable(getattr(math, name))}
+assert len(functions) == len(set(functions)) == 56
+assert set(functions) == actual_functions
+for expression, expected in [('math.isqrt(15)', 3), ('math.ceil(-1.5)', -1), ('math.floor(-1.5)', -2), ('math.trunc(-1.5)', -1), ('math.factorial(0)', 1), ('math.comb(5, 2)', 10), ('math.perm(5, 2)', 20), ('math.prod([2,3,4])', 24), ('math.sumprod([1,2],[3,4])', 11), ('math.fsum([1e16,1,-1e16])', 1.0), ('math.modf(-1.5)', (-0.5,-1.0)), ('math.dist([0,0],[3,4])', 5.0), ('math.isclose(0.1+0.2,0.3)', True)]:
+    assert eval(expression, {'math': math}) == expected
+assert type(math.pow(2, 3)) is float
+assert math.isnan(math.nan) and math.isinf(math.inf)
+print('PASS: gcd/lcm edge cases, complete Python 3.12 math reference (56 functions) and representative calculations')

@@ -483,5 +483,515 @@ window.LESSONS = [
         "code": "def solution(arr):\n    answer = []\n    for i in range(0,len(arr)):\n        if i == 0:\n            answer.append(arr[i])\n        if answer[-1] != arr[i]:\n            answer.append(arr[i])\n    return answer"
       }
     ]
+  },
+  {
+    "id": "gcd-lcm",
+    "title": "최대공약수와 최소공배수",
+    "en": "Greatest Common Divisor & Least Common Multiple",
+    "category": "수학",
+    "icon": "∩",
+    "color": "green",
+    "summary": "math.gcd()로 최대공약수를, math.lcm()으로 최소공배수를 구해요.",
+    "tags": [
+      "math",
+      "gcd",
+      "lcm",
+      "최대공약수",
+      "최소공배수"
+    ],
+    "concept": "math.gcd(n, m)은 두 정수를 공통으로 나누는 가장 큰 양의 정수인 최대공약수를 구합니다. math.lcm(n, m)은 두 정수의 공통된 양의 배수 중 가장 작은 값인 최소공배수를 구해요. 주신 코드는 두 결과를 순서대로 리스트에 담아 반환합니다.",
+    "conceptTitle": "핵심 정리",
+    "termsTitle": "함수 사용법과 코드 흐름",
+    "terms": [
+      {
+        "code": "import math",
+        "description": "파이썬 표준 라이브러리인 math 모듈을 불러옵니다. 별도 설치는 필요하지 않습니다."
+      },
+      {
+        "code": "math.gcd(n,m)",
+        "description": "정수 n, m의 최대공약수를 정수로 반환합니다. 음수를 넣어도 결과는 0 이상이며, 두 값이 모두 0이면 0입니다."
+      },
+      {
+        "code": "math.lcm(n,m)",
+        "description": "정수 n, m의 최소공배수를 정수로 반환합니다. 음수를 넣어도 결과는 0 이상이며, 둘 중 하나가 0이면 0입니다. Python 3.9 이상에서 사용할 수 있습니다."
+      },
+      {
+        "code": "return [math.gcd(n,m), math.lcm(n,m)]",
+        "description": "[최대공약수, 최소공배수] 순서의 리스트를 반환합니다."
+      }
+    ],
+    "patterns": [
+      {
+        "title": "작성한 풀이",
+        "description": "두 정수의 최대공약수와 최소공배수를 한 번에 반환합니다.",
+        "code": "import math\ndef solution(n, m):\n    return [math.gcd(n,m), math.lcm(n,m)]"
+      }
+    ]
+  },
+  {
+    "id": "math-functions",
+    "title": "math 함수 모음",
+    "en": "Python Math Reference",
+    "category": "수학",
+    "icon": "ƒ",
+    "color": "purple",
+    "summary": "Python 3.12의 math 함수 56개를 용도별로 찾아보는 정리 노트.",
+    "tags": [
+      "math",
+      "함수 모음",
+      "gcd",
+      "lcm",
+      "sqrt",
+      "isqrt",
+      "cbrt",
+      "pow",
+      "ceil",
+      "floor",
+      "trunc",
+      "fabs",
+      "factorial",
+      "comb",
+      "perm",
+      "prod",
+      "fsum",
+      "sumprod",
+      "exp",
+      "exp2",
+      "expm1",
+      "log",
+      "log2",
+      "log10",
+      "log1p",
+      "dist",
+      "hypot",
+      "radians",
+      "degrees",
+      "sin",
+      "cos",
+      "tan",
+      "asin",
+      "acos",
+      "atan",
+      "atan2",
+      "isclose",
+      "isfinite",
+      "isinf",
+      "isnan",
+      "fmod",
+      "remainder",
+      "copysign",
+      "modf",
+      "frexp",
+      "ldexp",
+      "nextafter",
+      "ulp",
+      "sinh",
+      "cosh",
+      "tanh",
+      "asinh",
+      "acosh",
+      "atanh",
+      "erf",
+      "erfc",
+      "gamma",
+      "lgamma",
+      "pi",
+      "e",
+      "tau",
+      "inf",
+      "nan"
+    ],
+    "concept": "math는 파이썬 표준 수학 모듈로 별도 설치 없이 사용할 수 있습니다. 아래 목록은 사이트 실행 환경인 Python 3.12 기준이며, 실수·정수 계산 함수를 용도별로 묶었습니다. 범주 제목을 눌러 펼치거나 접을 수 있어요.",
+    "conceptTitle": "핵심 정리",
+    "termsTitle": "사용 전에 확인하기",
+    "terms": [
+      {
+        "code": "import math",
+        "description": "모듈을 불러온 다음 math.함수이름(...) 형태로 호출합니다."
+      },
+      {
+        "code": "from math import 함수이름",
+        "description": "필요한 함수만 불러오면 math.를 붙이지 않고 사용할 수 있습니다."
+      },
+      {
+        "code": "abs(), round(), sum(), min(), max()",
+        "description": "이 함수들은 math 소속이 아닌 파이썬 내장 함수입니다."
+      },
+      {
+        "code": "반환 타입과 입력 범위",
+        "description": "sqrt(), log() 등 실수 계산 함수는 보통 float를 사용합니다. 큰 정수의 정확한 계산에는 isqrt(), gcd(), lcm() 등의 정수 함수를 사용하세요. 정의역을 벗어나면 ValueError, 결과가 실수 표현 범위를 넘으면 OverflowError가 발생할 수 있습니다."
+      }
+    ],
+    "patterns": [
+      {
+        "title": "모듈 불러오기",
+        "description": "아래 함수들은 math.함수이름(...) 형태로 사용합니다.",
+        "code": "import math"
+      }
+    ],
+    "functionGroups": [
+      {
+        "title": "약수와 배수",
+        "open": true,
+        "items": [
+          {
+            "name": "gcd",
+            "usage": "math.gcd(*integers)",
+            "description": "여러 정수의 최대공약수. 결과는 0 이상이며, 모든 입력이 0이면 0입니다."
+          },
+          {
+            "name": "lcm",
+            "usage": "math.lcm(*integers)",
+            "description": "여러 정수의 최소공배수. 입력 중 하나라도 0이면 0입니다. Python 3.9 이상."
+          }
+        ]
+      },
+      {
+        "title": "제곱근과 거듭제곱",
+        "open": true,
+        "items": [
+          {
+            "name": "sqrt",
+            "usage": "math.sqrt(x)",
+            "description": "x의 제곱근을 float로 반환합니다. 실수 입력은 x ≥ 0이어야 합니다."
+          },
+          {
+            "name": "isqrt",
+            "usage": "math.isqrt(n)",
+            "description": "0 이상 정수 n의 제곱근을 내림한 정수를 정확하게 반환합니다. 완전제곱수 여부는 x = isqrt(n) 후 x*x == n으로 확인합니다."
+          },
+          {
+            "name": "cbrt",
+            "usage": "math.cbrt(x)",
+            "description": "x의 세제곱근을 반환합니다. 음수도 처리합니다. Python 3.11 이상."
+          },
+          {
+            "name": "pow",
+            "usage": "math.pow(x, y)",
+            "description": "x의 y제곱을 float로 반환합니다. 정수의 정확한 거듭제곱이 필요하면 ** 또는 내장 pow()를 사용하세요."
+          }
+        ]
+      },
+      {
+        "title": "올림·내림·절댓값",
+        "open": true,
+        "items": [
+          {
+            "name": "ceil",
+            "usage": "math.ceil(x)",
+            "description": "x 이상인 가장 작은 정수로 올림합니다. 음수에서도 수직선의 큰 값 쪽으로 이동합니다."
+          },
+          {
+            "name": "floor",
+            "usage": "math.floor(x)",
+            "description": "x 이하인 가장 큰 정수로 내림합니다. 음수에서는 0에서 멀어질 수 있습니다."
+          },
+          {
+            "name": "trunc",
+            "usage": "math.trunc(x)",
+            "description": "소수 부분을 버려 0 방향의 정수로 만듭니다. 음수에서는 floor()와 결과가 다를 수 있습니다."
+          },
+          {
+            "name": "fabs",
+            "usage": "math.fabs(x)",
+            "description": "절댓값을 float로 반환합니다. 내장 abs()는 정수 입력의 정수 타입을 유지할 수 있습니다."
+          }
+        ]
+      },
+      {
+        "title": "팩토리얼·순열·조합·합과 곱",
+        "open": true,
+        "items": [
+          {
+            "name": "factorial",
+            "usage": "math.factorial(n)",
+            "description": "0 이상 정수 n의 팩토리얼 n!을 반환합니다. 0!은 1입니다."
+          },
+          {
+            "name": "comb",
+            "usage": "math.comb(n, k)",
+            "description": "중복 없이 k개를 고르는 조합 수. 순서는 구별하지 않습니다. n, k는 0 이상 정수이며, k > n이면 0입니다."
+          },
+          {
+            "name": "perm",
+            "usage": "math.perm(n, k=None)",
+            "description": "중복 없이 k개를 순서 있게 고르는 순열 수. k 생략 시 n!입니다. n, k는 0 이상 정수이며, k > n이면 0입니다."
+          },
+          {
+            "name": "prod",
+            "usage": "math.prod(iterable, start=1)",
+            "description": "반복 가능한 값들의 곱을 구합니다. 비어 있으면 start를 반환합니다."
+          },
+          {
+            "name": "fsum",
+            "usage": "math.fsum(iterable)",
+            "description": "부동소수점 값들의 합을 정밀도 손실을 줄여 계산합니다. 정수 합을 정확히 유지하려면 내장 sum()이 알맞습니다."
+          },
+          {
+            "name": "sumprod",
+            "usage": "math.sumprod(p, q)",
+            "description": "두 반복 가능한 객체에서 같은 위치끼리 곱한 값들의 합을 구합니다. 길이가 같아야 합니다. Python 3.12 이상."
+          }
+        ]
+      },
+      {
+        "title": "지수와 로그",
+        "open": false,
+        "items": [
+          {
+            "name": "exp",
+            "usage": "math.exp(x)",
+            "description": "e의 x제곱을 구합니다."
+          },
+          {
+            "name": "exp2",
+            "usage": "math.exp2(x)",
+            "description": "2의 x제곱을 구합니다. Python 3.11 이상."
+          },
+          {
+            "name": "expm1",
+            "usage": "math.expm1(x)",
+            "description": "e의 x제곱에서 1을 뺀 값. x가 0에 가까울 때 exp(x)-1보다 정밀도에 유리합니다."
+          },
+          {
+            "name": "log",
+            "usage": "math.log(x, base=math.e)",
+            "description": "로그를 계산합니다. 밑을 생략하면 자연로그입니다. x > 0이고, 밑은 양수이며 1이 아니어야 합니다."
+          },
+          {
+            "name": "log2",
+            "usage": "math.log2(x)",
+            "description": "밑이 2인 로그. x > 0이어야 합니다."
+          },
+          {
+            "name": "log10",
+            "usage": "math.log10(x)",
+            "description": "밑이 10인 로그. x > 0이어야 합니다."
+          },
+          {
+            "name": "log1p",
+            "usage": "math.log1p(x)",
+            "description": "1+x의 자연로그. x > -1이며, x가 0에 가까울 때 정밀도에 유리합니다."
+          }
+        ]
+      },
+      {
+        "title": "거리·각도·삼각함수",
+        "open": false,
+        "items": [
+          {
+            "name": "dist",
+            "usage": "math.dist(p, q)",
+            "description": "차원이 같은 두 점 사이의 유클리드 거리를 구합니다."
+          },
+          {
+            "name": "hypot",
+            "usage": "math.hypot(*coordinates)",
+            "description": "좌표 제곱의 합의 제곱근, 즉 원점에서 그 점까지의 거리를 구합니다."
+          },
+          {
+            "name": "radians",
+            "usage": "math.radians(x)",
+            "description": "도(degree)를 라디안으로 변환합니다."
+          },
+          {
+            "name": "degrees",
+            "usage": "math.degrees(x)",
+            "description": "라디안을 도(degree)로 변환합니다."
+          },
+          {
+            "name": "sin",
+            "usage": "math.sin(x)",
+            "description": "라디안 각도 x의 사인."
+          },
+          {
+            "name": "cos",
+            "usage": "math.cos(x)",
+            "description": "라디안 각도 x의 코사인."
+          },
+          {
+            "name": "tan",
+            "usage": "math.tan(x)",
+            "description": "라디안 각도 x의 탄젠트."
+          },
+          {
+            "name": "asin",
+            "usage": "math.asin(x)",
+            "description": "아크사인을 라디안으로 반환합니다. -1 ≤ x ≤ 1."
+          },
+          {
+            "name": "acos",
+            "usage": "math.acos(x)",
+            "description": "아크코사인을 라디안으로 반환합니다. -1 ≤ x ≤ 1."
+          },
+          {
+            "name": "atan",
+            "usage": "math.atan(x)",
+            "description": "아크탄젠트를 라디안으로 반환합니다."
+          },
+          {
+            "name": "atan2",
+            "usage": "math.atan2(y, x)",
+            "description": "점 (x, y)의 방향 각도를 라디안으로 반환하며 사분면을 구별합니다. 인수 순서는 y, x입니다."
+          }
+        ]
+      },
+      {
+        "title": "실수 비교와 상태 확인",
+        "open": false,
+        "items": [
+          {
+            "name": "isclose",
+            "usage": "math.isclose(a, b, rel_tol=1e-9, abs_tol=0.0)",
+            "description": "두 값이 허용 오차 안에서 가까운지 판정합니다. 0 근처를 비교할 때는 적절한 abs_tol을 지정하세요."
+          },
+          {
+            "name": "isfinite",
+            "usage": "math.isfinite(x)",
+            "description": "무한대와 NaN이 아닌 유한한 값인지 확인합니다."
+          },
+          {
+            "name": "isinf",
+            "usage": "math.isinf(x)",
+            "description": "양수 또는 음수 무한대인지 확인합니다."
+          },
+          {
+            "name": "isnan",
+            "usage": "math.isnan(x)",
+            "description": "숫자가 아님을 나타내는 NaN인지 확인합니다."
+          }
+        ]
+      },
+      {
+        "title": "나머지·부호·실수 표현",
+        "open": false,
+        "items": [
+          {
+            "name": "fmod",
+            "usage": "math.fmod(x, y)",
+            "description": "실수 나머지로, 결과 부호는 x를 따릅니다. % 연산의 부호 규칙과 다릅니다. y는 0이 아니어야 합니다."
+          },
+          {
+            "name": "remainder",
+            "usage": "math.remainder(x, y)",
+            "description": "x - n*y를 반환하며 n은 x/y에 가장 가까운 정수입니다. 정확히 중간이면 짝수 정수를 선택합니다. y는 0이 아니어야 합니다."
+          },
+          {
+            "name": "copysign",
+            "usage": "math.copysign(x, y)",
+            "description": "x의 절댓값에 y의 부호를 붙인 float를 반환합니다."
+          },
+          {
+            "name": "modf",
+            "usage": "math.modf(x)",
+            "description": "(소수 부분, 정수 부분) 튜플을 반환합니다. 둘 다 float이고 x의 부호를 따릅니다."
+          },
+          {
+            "name": "frexp",
+            "usage": "math.frexp(x)",
+            "description": "x = m * 2**e가 되는 (m, e)를 반환합니다. x가 0이 아니면 0.5 ≤ abs(m) < 1입니다."
+          },
+          {
+            "name": "ldexp",
+            "usage": "math.ldexp(x, i)",
+            "description": "x * 2**i를 계산합니다."
+          },
+          {
+            "name": "nextafter",
+            "usage": "math.nextafter(x, y, steps=1)",
+            "description": "x에서 y 방향으로 steps번 이동한 다음 표현 가능한 부동소수점 값을 반환합니다. steps 인수는 Python 3.12 이상."
+          },
+          {
+            "name": "ulp",
+            "usage": "math.ulp(x)",
+            "description": "x의 마지막 유효 비트에 해당하는 간격을 반환합니다. 부동소수점 정밀도를 다룰 때 사용합니다."
+          }
+        ]
+      },
+      {
+        "title": "쌍곡선 함수",
+        "open": false,
+        "items": [
+          {
+            "name": "sinh",
+            "usage": "math.sinh(x)",
+            "description": "쌍곡사인."
+          },
+          {
+            "name": "cosh",
+            "usage": "math.cosh(x)",
+            "description": "쌍곡코사인."
+          },
+          {
+            "name": "tanh",
+            "usage": "math.tanh(x)",
+            "description": "쌍곡탄젠트."
+          },
+          {
+            "name": "asinh",
+            "usage": "math.asinh(x)",
+            "description": "역쌍곡사인."
+          },
+          {
+            "name": "acosh",
+            "usage": "math.acosh(x)",
+            "description": "역쌍곡코사인. x ≥ 1."
+          },
+          {
+            "name": "atanh",
+            "usage": "math.atanh(x)",
+            "description": "역쌍곡탄젠트. -1 < x < 1."
+          }
+        ]
+      },
+      {
+        "title": "특수 함수",
+        "open": false,
+        "items": [
+          {
+            "name": "erf",
+            "usage": "math.erf(x)",
+            "description": "오차 함수로, 정규분포 등의 계산에 사용합니다."
+          },
+          {
+            "name": "erfc",
+            "usage": "math.erfc(x)",
+            "description": "상보 오차 함수로 1-erf(x)에 해당하며, 큰 x에서 뺄셈에 따른 정밀도 손실을 줄입니다."
+          },
+          {
+            "name": "gamma",
+            "usage": "math.gamma(x)",
+            "description": "감마 함수. 양의 정수 n에서 (n-1)!과 같습니다. 0과 음의 정수는 정의역에 포함되지 않습니다."
+          },
+          {
+            "name": "lgamma",
+            "usage": "math.lgamma(x)",
+            "description": "감마 함수 절댓값의 자연로그. 0과 음의 정수는 정의역에 포함되지 않습니다."
+          }
+        ]
+      }
+    ],
+    "constants": [
+      {
+        "usage": "math.pi",
+        "description": "원주율 π"
+      },
+      {
+        "usage": "math.e",
+        "description": "자연상수 e"
+      },
+      {
+        "usage": "math.tau",
+        "description": "2π"
+      },
+      {
+        "usage": "math.inf",
+        "description": "양의 무한대"
+      },
+      {
+        "usage": "math.nan",
+        "description": "숫자가 아님을 나타내는 NaN. 자기 자신과 ==로 비교해도 False이므로 math.isnan()으로 확인합니다."
+      }
+    ]
   }
 ];
