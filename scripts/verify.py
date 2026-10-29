@@ -7,7 +7,7 @@ result = subprocess.run(
     ['node', '-e', 'global.window={}; require("./lessons.js"); console.log(JSON.stringify(window.LESSONS));'],
     cwd=ROOT, capture_output=True, text=True, check=True)
 lessons = json.loads(result.stdout)
-assert [lesson['id'] for lesson in lessons] == ['interval-sum', 'string-to-int', 'list-insert-append', 'digits-descending', 'perfect-square', 'list-index', 'list-remove-empty']
+assert [lesson['id'] for lesson in lessons] == ['interval-sum', 'string-to-int', 'list-insert-append', 'digits-descending', 'perfect-square', 'list-index', 'list-remove-empty', 'matrix-addition']
 assert lessons[0]['category'] == '수학'
 formula = lessons[0]['patterns'][0]['code']
 assert formula == '(a + b) * (abs(a - b) + 1) // 2'
@@ -96,3 +96,16 @@ except ValueError:
 else:
     raise AssertionError('Initially empty input must raise ValueError as documented')
 print('PASS: minimum removal, first duplicate only, empty-result sentinel and original-list mutation')
+
+matrix_note = lessons[7]
+assert matrix_note['category'] == '2차원 배열'
+namespace = {}
+exec(matrix_note['patterns'][0]['code'], namespace)
+from copy import deepcopy
+for arr1, arr2, expected in [([[1,2,3],[4,5,6]], [[6,5,4],[3,2,1]], [[7,7,7],[7,7,7]]), ([[1],[2]], [[3],[4]], [[4],[6]]), ([[-1,0]], [[1,-2]], [[0,-2]]), ([], [], []), ([[]], [[]], [[]])]:
+    before1, before2 = deepcopy(arr1), deepcopy(arr2)
+    result = namespace['solution'](arr1, arr2)
+    assert result == expected
+    assert arr1 == before1 and arr2 == before2
+    assert len({id(row) for row in result}) == len(result)
+print('PASS: matrix addition, rectangular shapes, empty inputs, independent rows and unchanged input matrices')

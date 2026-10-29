@@ -316,5 +316,62 @@ window.LESSONS = [
         "code": "def solution(arr):\n    answer = []\n    arr.remove(min(arr))\n    answer = arr\n    if not arr:\n        answer.append(-1)\n    return answer"
       }
     ]
+  },
+  {
+    "id": "matrix-addition",
+    "title": "행렬의 덧셈",
+    "en": "Matrix Addition",
+    "category": "2차원 배열",
+    "icon": "▦",
+    "color": "blue",
+    "summary": "행과 열을 순회하며 두 2차원 배열의 같은 위치에 있는 값을 더해요.",
+    "tags": [
+      "2차원 배열",
+      "행렬",
+      "덧셈",
+      "중첩 반복문",
+      "행",
+      "열"
+    ],
+    "concept": "같은 크기의 두 2차원 배열 arr1, arr2에서 같은 행·열에 있는 값끼리 더해 새 배열을 만드는 코드입니다. 바깥 반복문은 행 i를, 안쪽 반복문은 열 j를 순회합니다. 각 행의 결과를 row에 모은 뒤 answer에 추가해요.",
+    "conceptTitle": "핵심 정리",
+    "termsTitle": "코드 처리 순서",
+    "terms": [
+      {
+        "code": "answer = []",
+        "description": "덧셈 결과를 담을 새 2차원 배열을 준비합니다."
+      },
+      {
+        "code": "for i in range(0,len(arr1)):",
+        "description": "arr1의 행 개수만큼 반복합니다. i는 현재 행의 인덱스입니다."
+      },
+      {
+        "code": "row = []",
+        "description": "행을 처리할 때마다 새로운 리스트를 만들어 현재 행의 결과를 담습니다."
+      },
+      {
+        "code": "for j in range(0,len(arr1[i])):",
+        "description": "현재 행의 열 개수만큼 반복합니다. j는 현재 열의 인덱스입니다."
+      },
+      {
+        "code": "row.append(arr1[i][j] + arr2[i][j])",
+        "description": "두 배열의 i행 j열 값을 더하고, 현재 결과 행의 맨 뒤에 추가합니다."
+      },
+      {
+        "code": "answer.append(row)",
+        "description": "안쪽 반복문이 끝나 한 행이 완성되면 answer에 추가합니다. 이 줄은 열 반복문 밖, 행 반복문 안에 있습니다."
+      },
+      {
+        "code": "return answer",
+        "description": "완성된 2차원 배열을 반환합니다. 입력 배열은 수정하지 않으며, 두 배열의 행 수와 각 행의 열 수가 같은 경우를 전제로 합니다."
+      }
+    ],
+    "patterns": [
+      {
+        "title": "작성한 풀이",
+        "description": "같은 크기의 두 2차원 배열에서 같은 위치의 원소끼리 더합니다.",
+        "code": "def solution(arr1, arr2):\n    answer = []\n    for i in range(0,len(arr1)):\n        row = []\n        for j in range(0,len(arr1[i])):\n            row.append(arr1[i][j] + arr2[i][j])\n        answer.append(row)\n    return answer"
+      }
+    ]
   }
 ];
