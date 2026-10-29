@@ -1064,5 +1064,72 @@ window.LESSONS = [
         "code": "def solution(s):\n    answer = []\n    check ={}\n\n    for i in range(len(s)):\n        if s[i] not in check:\n            answer.append(-1)\n        else:\n            answer.append(i - check[s[i]])\n\n        check[s[i]] = i\n\n    return answer"
       }
     ]
+  },
+  {
+    "id": "character-code",
+    "title": "ord()·chr()로 문자 코드 변환",
+    "en": "Character Codes with ord & chr",
+    "category": "문자열",
+    "icon": "Aa",
+    "color": "blue",
+    "summary": "ord()로 문자를 숫자로, chr()로 숫자를 문자로 바꾸고 알파벳을 순환시켜요.",
+    "tags": [
+      "문자열",
+      "ord",
+      "chr",
+      "아스키",
+      "ASCII",
+      "유니코드",
+      "시저 암호",
+      "% 26"
+    ],
+    "concept": "ord()는 한 문자를 정수 코드로, chr()는 정수 코드를 문자로 바꿉니다. 주신 코드는 이 변환을 이용해 영문 알파벳을 n칸 뒤로 이동하고, Z 또는 z를 넘으면 같은 대소문자의 처음으로 돌아갑니다. 입력은 영문 대소문자와 공백, n은 0 이상의 정수를 전제로 하며 공백은 유지합니다.",
+    "conceptTitle": "문자 코드 변환 개념",
+    "termsTitle": "아스키 코드와 처리 순서",
+    "terms": [
+      {
+        "code": "ord(i)",
+        "description": "길이가 1인 문자열 i의 유니코드 코드 포인트를 정수로 반환합니다. 영문 알파벳은 ASCII와 같은 코드값을 사용합니다. ord()는 이미 정수를 반환하므로 코드의 int(ord(i))에서 int()는 생략해도 같은 값입니다."
+      },
+      {
+        "code": "chr(정수 코드)",
+        "description": "정수 코드에 해당하는 문자 하나를 반환합니다. ord()와 반대 방향의 변환입니다."
+      },
+      {
+        "code": "'A' = 65, 'Z' = 90 / 'a' = 97, 'z' = 122",
+        "description": "영문 대문자와 소문자는 각각 코드가 연속으로 배치되어 있습니다. 65와 97은 각 범위의 시작, 90과 122는 끝입니다."
+      },
+      {
+        "code": "lists = list(s)",
+        "description": "문자열을 한 글자씩 담은 리스트로 바꿉니다. for문의 i는 숫자 인덱스가 아니라 문자 하나입니다."
+      },
+      {
+        "code": "if i == ' ':",
+        "description": "공백이면 그대로 결과에 추가합니다. 알파벳 이동 계산을 적용하지 않습니다."
+      },
+      {
+        "code": "(int(ord(i)) -65 + n) % 26 + 65",
+        "description": "대문자 코드를 A 기준의 0~25로 바꾸고 n을 더합니다. % 26으로 26글자 범위 안을 순환시킨 뒤 65를 더해 대문자 코드로 복원하고, chr()로 문자로 만듭니다."
+      },
+      {
+        "code": "(int(ord(i)) -97 + n) % 26 + 97",
+        "description": "소문자는 a의 코드 97을 기준으로 같은 계산을 합니다. z를 넘으면 a부터 다시 이어집니다."
+      },
+      {
+        "code": "answer += chr(int(ord(i)) + n)",
+        "description": "알파벳 범위를 넘어가지 않는 경우에는 문자 코드에 n을 더한 뒤 chr()로 바꿔 결과 문자열에 붙입니다."
+      },
+      {
+        "code": "return answer",
+        "description": "대소문자와 공백을 유지하며 알파벳을 이동한 결과를 반환합니다. 이 코드는 임의의 유니코드 문자 전체를 암호화하는 방식이 아니라 영문 알파벳과 공백을 위한 풀이입니다."
+      }
+    ],
+    "patterns": [
+      {
+        "title": "작성한 풀이",
+        "description": "주신 코드를 그대로 수록했습니다. 영문 알파벳을 n칸 이동하고 범위를 넘으면 순환합니다.",
+        "code": "def solution(s, n):\n    answer = ''\n    lists = list(s)\n    for i in lists:\n        if i == ' ':\n            answer += ' '\n        elif int(ord(i)) <= 90 and int(ord(i)) + n > 90:\n            answer += chr((int(ord(i)) -65 + n) % 26 + 65)\n        elif int(ord(i)) <= 122 and int(ord(i)) + n > 122:\n            answer += chr((int(ord(i)) -97 + n) % 26 + 97)\n        else:\n            answer += chr(int(ord(i)) + n)\n    return answer"
+      }
+    ]
   }
 ];

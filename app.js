@@ -13,12 +13,12 @@
   function save() { try { localStorage.setItem('pynote-v1', JSON.stringify(state)); } catch { toast('저장 공간을 사용할 수 없어 이번 방문 동안만 기록됩니다.'); } }
   function route() { return location.hash.slice(1) || 'home'; }
   function highlight(code) {
-    const tokens = /("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|#[^\n]*|\b(?:from|import|for|in|if|else|elif|while|return|def|not|and|or|True|False|None|continue|break)\b|\b\d+\b|\b(?:print|range|len|sum|min|sorted|set|list|reversed|float|enumerate|abs|int)\b)/g;
+    const tokens = /("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|#[^\n]*|\b(?:from|import|for|in|if|else|elif|while|return|def|not|and|or|True|False|None|continue|break)\b|\b\d+\b|\b(?:print|range|len|sum|min|sorted|set|list|reversed|float|enumerate|abs|int|ord|chr)\b)/g;
     let result = '', last = 0;
     for (const match of code.matchAll(tokens)) {
       result += esc(code.slice(last, match.index));
       const token = match[0];
-      const cls = token[0] === '#' ? 'comment' : /^["']/.test(token) ? 'string' : /^\d/.test(token) ? 'number' : /^(print|range|len|sum|min|sorted|set|list|reversed|float|enumerate|abs|int)$/.test(token) ? 'function' : 'keyword';
+      const cls = token[0] === '#' ? 'comment' : /^["']/.test(token) ? 'string' : /^\d/.test(token) ? 'number' : /^(print|range|len|sum|min|sorted|set|list|reversed|float|enumerate|abs|int|ord|chr)$/.test(token) ? 'function' : 'keyword';
       result += `<span class="${cls}">${esc(token)}</span>`;
       last = match.index + token.length;
     }

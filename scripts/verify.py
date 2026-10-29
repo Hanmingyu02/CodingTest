@@ -7,7 +7,7 @@ result = subprocess.run(
     ['node', '-e', 'global.window={}; require("./lessons.js"); console.log(JSON.stringify(window.LESSONS));'],
     cwd=ROOT, capture_output=True, text=True, check=True)
 lessons = json.loads(result.stdout)
-assert [lesson['id'] for lesson in lessons] == ['interval-sum', 'string-to-int', 'list-insert-append', 'digits-descending', 'perfect-square', 'list-index', 'list-remove-empty', 'matrix-addition', 'string-isdigit', 'list-last-element', 'gcd-lcm', 'math-functions', 'dictionary-last-position']
+assert [lesson['id'] for lesson in lessons] == ['interval-sum', 'string-to-int', 'list-insert-append', 'digits-descending', 'perfect-square', 'list-index', 'list-remove-empty', 'matrix-addition', 'string-isdigit', 'list-last-element', 'gcd-lcm', 'math-functions', 'dictionary-last-position', 'character-code']
 assert lessons[0]['category'] == '수학'
 formula = lessons[0]['patterns'][0]['code']
 assert formula == '(a + b) * (abs(a - b) + 1) // 2'
@@ -174,3 +174,20 @@ for length in range(6):
             expected.append(-1 if previous == -1 else i-previous)
         assert namespace['solution'](text) == expected
 print('PASS: dictionary solution tracks the most recent position, including index zero, repeated characters and empty input')
+
+character_note = lessons[13]
+assert character_note['category'] == '문자열'
+namespace = {}
+exec(character_note['patterns'][0]['code'], namespace)
+from string import ascii_uppercase, ascii_lowercase
+text = ascii_uppercase + ' ' + ascii_lowercase + '  '
+for shift in (0, 1, 5, 25, 26, 27, 100):
+    expected = ''
+    for char in text:
+        alphabet = ascii_uppercase if char in ascii_uppercase else ascii_lowercase
+        expected += ' ' if char == ' ' else alphabet[(alphabet.index(char) + shift) % 26]
+    assert namespace['solution'](text, shift) == expected
+assert namespace['solution']('', 1) == ''
+assert namespace['solution']('Zz', 1) == 'Aa'
+assert type(ord('A')) is int and ord('A') == 65 and chr(65) == 'A'
+print('PASS: ord/chr conversion, alphabet boundaries, case, spaces and repeated wraparound')
