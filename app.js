@@ -46,7 +46,7 @@
     const label = note ? note.title : category ? category.title : '전체 노트';
     $('#current-page').textContent = label;
     $('#total-count').textContent = notes.length;
-    document.title = `${label} — 파이노트`;
+    document.title = `${label} — 코테준비`;
     $('.overview-link').classList.toggle('active', !activeCategory);
     if (!activeCategory) $('.overview-link').setAttribute('aria-current', 'page');
     else $('.overview-link').removeAttribute('aria-current');
