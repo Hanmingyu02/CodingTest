@@ -79,6 +79,14 @@ window.NOTEBOOK = {
     "description": "sorted()로 문자를 내림차순 정렬하고 join()으로 문자열로 합칩니다.",
     "code": "''.join(sorted(s, reverse=True))",
     "text": "s는 정렬할 문자열입니다. sorted(s, reverse=True)는 문자를 내림차순으로 정렬한 새 리스트를 만듭니다.\n''.join(...)은 정렬된 문자들을 구분자 없이 이어 붙여 문자열로 만듭니다.\n원본 문자열은 바뀌지 않으며, 문자 코드 기준으로 정렬됩니다."
+  },
+  {
+    "id": "array-last-element",
+    "title": "배열의 마지막 요소 확인",
+    "category": "array",
+    "description": "[-1]로 리스트의 마지막 요소를 가져옵니다.",
+    "code": "배열이름[-1]",
+    "text": "-1은 뒤에서 첫 번째, 즉 마지막 요소의 인덱스입니다.\n마지막 값을 읽기만 하며 원본 리스트는 바뀌지 않습니다.\n빈 리스트에서 사용하면 IndexError가 발생합니다."
   }
 ]
 };
