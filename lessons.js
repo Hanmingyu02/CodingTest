@@ -23,6 +23,14 @@ window.NOTEBOOK = {
     "description": "sort(reverse=True)로 배열을 큰 값부터 작은 값순으로 정렬합니다.",
     "code": "arr.sort(reverse=True)",
     "text": "arr은 정렬할 리스트입니다. reverse=True는 내림차순 정렬을 뜻합니다.\n원본 arr를 직접 바꾸고 반환값은 None이므로, 정렬 후 arr를 그대로 사용합니다."
+  },
+  {
+    "id": "array-index",
+    "title": "특정 값의 인덱스 찾기",
+    "category": "array",
+    "description": "index()로 리스트에서 특정 값이 있는 위치를 찾습니다.",
+    "code": "arr.index(값)",
+    "text": "arr은 검색할 리스트이며, 인덱스는 0부터 시작합니다.\n같은 값이 여러 개 있으면 처음 나오는 위치를 반환합니다.\n찾는 값이 없으면 ValueError가 발생합니다."
   }
 ]
 };
