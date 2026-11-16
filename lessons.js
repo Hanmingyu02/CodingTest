@@ -66,11 +66,11 @@ window.NOTEBOOK = {
   },
   {
     "id": "divisor-count-sqrt",
-    "title": "제곱근 구하기",
+    "title": "제곱근으로 약수 개수 구하기",
     "category": "math",
-    "description": "n ** 0.5로 제곱근을 구합니다.",
-    "code": "n ** 0.5\nint(n ** 0.5)",
-    "text": "n ** 0.5는 0 이상의 수 n의 제곱근을 구합니다.\nint(n ** 0.5)는 제곱근의 소수 부분을 버린 정수입니다."
+    "description": "제곱근까지만 확인하고 약수를 두 개씩 셉니다.",
+    "code": "count = 0\nfor j in range(1, int(n ** 0.5) + 1):\n    if n % j == 0:\n        count += 2\n\nif int(n ** 0.5) ** 2 == n:\n    count -= 1",
+    "text": "n은 양의 정수입니다. j가 약수이면 n // j도 약수이므로, 제곱근까지만 검사하며 2개씩 셉니다.\n완전제곱수는 제곱근이 자기 자신과 짝을 이루므로 중복된 1개를 빼줍니다.\n계산이 끝난 count가 n의 약수 개수입니다."
   }
 ]
 };
