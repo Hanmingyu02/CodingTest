@@ -63,6 +63,14 @@ window.NOTEBOOK = {
     "description": "//로 나눗셈 결과를 내림한 몫을 구합니다.",
     "code": "a // b",
     "text": "a를 b로 나눈 결과를 내림합니다. 정수끼리 계산하면 정수(int)를 반환합니다.\n음수인 경우에도 더 작은 정수 방향으로 내립니다.\nb가 0이면 ZeroDivisionError가 발생합니다."
+  },
+  {
+    "id": "divisor-count-sqrt",
+    "title": "제곱근으로 약수의 개수 구하기",
+    "category": "math",
+    "description": "약수는 짝을 이루므로 제곱근까지만 확인해 개수를 셉니다.",
+    "code": "def solution(left, right):\n    answer = 0\n    for i in range(left, right+1):\n        count = 0\n        for j in range(1,int(i ** 0.5) +1):\n            if i % j == 0:\n                count+=1\n        count *=2\n        if int(i ** 0.5) ** 2 == i:\n            count -=1\n        if count % 2 ==0:\n            answer += i\n        else:\n            answer -= i\n\n    return answer",
+    "text": "양의 정수 i에서 j가 약수이면 i // j도 약수입니다.\n1부터 int(i ** 0.5)까지 나누어떨어지는 수를 센 뒤 2를 곱해 약수 쌍의 개수를 반영합니다.\ni가 완전제곱수이면 제곱근이 자기 자신과 짝을 이루므로 중복된 1개를 빼줍니다.\n주신 코드는 left부터 right까지 약수 개수가 짝수인 수는 더하고, 홀수인 수는 뺍니다. 각 수의 약수 검사는 O(√i)입니다."
   }
 ]
 };
