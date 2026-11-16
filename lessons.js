@@ -71,6 +71,14 @@ window.NOTEBOOK = {
     "description": "제곱근까지만 확인하고 약수를 두 개씩 셉니다.",
     "code": "count = 0\nfor j in range(1, int(n ** 0.5) + 1):\n    if n % j == 0:\n        count += 2\n\nif int(n ** 0.5) ** 2 == n:\n    count -= 1",
     "text": "n은 양의 정수입니다. j가 약수이면 n // j도 약수이므로, 제곱근까지만 검사하며 2개씩 셉니다.\n완전제곱수는 제곱근이 자기 자신과 짝을 이루므로 중복된 1개를 빼줍니다.\n계산이 끝난 count가 n의 약수 개수입니다."
+  },
+  {
+    "id": "string-sort-descending",
+    "title": "문자열 내림차순 정렬",
+    "category": "sort",
+    "description": "sorted()로 문자를 내림차순 정렬하고 join()으로 문자열로 합칩니다.",
+    "code": "''.join(sorted(s, reverse=True))",
+    "text": "s는 정렬할 문자열입니다. sorted(s, reverse=True)는 문자를 내림차순으로 정렬한 새 리스트를 만듭니다.\n''.join(...)은 정렬된 문자들을 구분자 없이 이어 붙여 문자열로 만듭니다.\n원본 문자열은 바뀌지 않으며, 문자 코드 기준으로 정렬됩니다."
   }
 ]
 };
