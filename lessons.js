@@ -15,6 +15,14 @@ window.NOTEBOOK = {
     "description": "count()로 문자열 안에 특정 문자가 몇 번 나오는지 셉니다.",
     "code": "문자열이름.count(\"문자\")",
     "text": "문자열이름에는 대상 문자열을, 큰따옴표 안에는 찾을 문자를 넣습니다.\n등장 횟수를 정수로 반환하며, 찾는 문자가 없으면 0을 반환합니다."
+  },
+  {
+    "id": "array-sort-descending",
+    "title": "배열 내림차순 정렬",
+    "category": "sort",
+    "description": "sort(reverse=True)로 배열을 큰 값부터 작은 값순으로 정렬합니다.",
+    "code": "arr.sort(reverse=True)",
+    "text": "arr은 정렬할 리스트입니다. reverse=True는 내림차순 정렬을 뜻합니다.\n원본 arr를 직접 바꾸고 반환값은 None이므로, 정렬 후 arr를 그대로 사용합니다."
   }
 ]
 };
