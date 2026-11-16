@@ -87,6 +87,14 @@ window.NOTEBOOK = {
     "description": "[-1]로 리스트의 마지막 요소를 가져옵니다.",
     "code": "배열이름[-1]",
     "text": "-1은 뒤에서 첫 번째, 즉 마지막 요소의 인덱스입니다.\n마지막 값을 읽기만 하며 원본 리스트는 바뀌지 않습니다.\n빈 리스트에서 사용하면 IndexError가 발생합니다."
+  },
+  {
+    "id": "queue-index-priority",
+    "title": "큐에서 인덱스 추적과 우선순위 비교",
+    "category": "algorithm",
+    "description": "(우선순위, 원래 인덱스)를 큐에 저장하고 if Q와 max(Q)[0]으로 남은 항목을 확인합니다.",
+    "code": "Q = []\nfor i in range(len(priorities)):\n    Q.append((priorities[i], i))\n\nwhile Q:\n    priority, idx = Q.pop(0)\n    if Q and priority < max(Q)[0]:\n        Q.append((priority, idx))",
+    "text": "큐 사용: 먼저 들어온 항목을 먼저 꺼내는 구조입니다. 이 코드는 리스트를 큐처럼 사용하며, append()로 맨 뒤에 넣고 pop(0)으로 맨 앞 항목을 꺼냅니다. 다시 넣지 않은 항목은 큐에서 빠진 상태로 처리됩니다.\n\n인덱스 추적: (priorities[i], i)는 (우선순위, 원래 인덱스) 튜플입니다. priority, idx = Q.pop(0)은 꺼낸 튜플을 두 변수에 나누어 담습니다. 큐의 순서가 바뀌어도 idx는 원래 위치이므로 idx == location으로 목표 항목인지 확인할 수 있습니다.\n\nif Q / while Q: Q에 요소가 있으면 참, 빈 리스트이면 거짓입니다. while Q는 큐가 빌 때까지 반복합니다.\n\nmax(Q)[0]: max(Q)는 우선순위가 가장 큰 튜플을 찾고, [0]은 그 튜플의 첫 번째 값인 우선순위를 가져옵니다. 우선순위가 같으면 두 번째 값인 인덱스도 비교하지만, 가져오는 우선순위는 같습니다. Q의 첫 항목을 의미하는 것은 아닙니다.\n\nif Q and priority < max(Q)[0]: 방금 꺼낸 항목보다 높은 우선순위가 남아 있는지 검사합니다. and는 앞 조건이 거짓이면 뒤를 계산하지 않으므로, 빈 큐에서 max(Q)를 호출해 생기는 ValueError를 피합니다.\n\nQ.append((priority, idx)): 더 높은 우선순위가 남아 있으면 원래 인덱스를 그대로 유지한 채 맨 뒤로 보냅니다. 같은 우선순위만 남아 있으면 뒤로 보내지 않습니다."
   }
 ]
 };
