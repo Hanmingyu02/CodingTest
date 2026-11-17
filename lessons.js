@@ -319,6 +319,30 @@ window.NOTEBOOK = {
     "related": [
       "queue-index-priority"
     ]
+  },
+  {
+    "id": "map-lambda-sort",
+    "title": "map() 문자열 변환과 lambda 정렬",
+    "category": "sort",
+    "description": "숫자들을 문자열로 바꾸고, 반복한 문자열을 비교 기준으로 정렬하는 사용법입니다.",
+    "usages": [
+      {
+        "title": "숫자들을 문자열 리스트로 바꾸기",
+        "code": "arr = list(map(str, numbers))",
+        "meaning": "map(str, numbers)는 numbers의 각 원소에 str()를 적용하는 이터레이터를 만듭니다. list()로 변환 결과를 모아 문자열 리스트 arr로 저장합니다. str은 적용할 함수로 전달합니다.",
+        "application": "숫자들을 이어 붙이거나, 각 숫자를 문자열 기준으로 비교·정렬해야 할 때 먼저 사용합니다."
+      },
+      {
+        "title": "lambda로 비교 기준 만들기",
+        "code": "arr.sort(key=lambda x: x * 3, reverse=True)",
+        "meaning": "key는 각 원소의 비교 기준을 계산하는 함수입니다. lambda x: x * 3은 문자열 원소 x를 받아 세 번 이어 붙인 비교용 문자열을 만듭니다. reverse=True로 그 기준을 내림차순 정렬하며, arr의 원소 값은 그대로이고 순서만 바뀝니다.",
+        "application": "여러 숫자를 이어 붙여 큰 수를 만들 때처럼, 자릿수가 다른 숫자 문자열에 반복 문자열을 비교 키로 쓰는 상황에 활용합니다. 반복 횟수 3은 입력 자릿수 제약에 맞는지 확인해야 하며, 임의 길이에 항상 적용되는 규칙은 아닙니다."
+      }
+    ],
+    "related": [
+      "array-sort-descending",
+      "string-sort-descending"
+    ]
   }
 ]
 };
