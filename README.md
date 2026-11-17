@@ -31,10 +31,12 @@ Python 3와 Node.js가 필요합니다. 기존 체크아웃을 사용하며 별�
 - 문자열 → 문자와 아스키코드 변환: `ord()`, `chr()`
 - 배열 → 배열 요소 제거: `remove()`, `pop()`
 - 알고리즘 → 큐에서 인덱스 추적과 우선순위 비교: 튜플, `pop(0)`, `if Q`, `max(Q)[0]`
+- 배열 → 2차원 리스트 접근과 값의 합계: `[행][열]`, 리스트 컴프리헨션, `sum()`
+- 알고리즘 → 시간 단위 시뮬레이션과 큐: 이동·퇴장·진입 순서와 종료 조건
 
 ## 내용 관리
 
-`lessons.js`의 `window.NOTEBOOK.categories`에 요청한 5개 카테고리가 있습니다. `notes`에는 사용자가 제공하거나 명시적으로 요청한 내용만 추가합니다. 노트는 `id`, `title`, `category`(카테고리 ID), `description`, `code`, `text`로 구성합니다. 같은 카테고리의 노트는 목록에서 함께 표시됩니다. 화면 동작은 `app.js`, 디자인은 `styles.css`에서 관리합니다.
+`lessons.js`의 `window.NOTEBOOK.categories`에 요청한 5개 카테고리가 있습니다. `notes`에는 사용자가 제공하거나 명시적으로 요청한 내용만 추가합니다. 노트는 `id`, `title`, `category`(카테고리 ID), `description`, `code`, `text`로 구성합니다. 같은 카테고리의 노트는 목록에서 함께 표시됩니다. `related`에는 관련 노트 ID를 넣어 설명의 중복 없이 연결합니다. 화면 동작은 `app.js`, 디자인은 `styles.css`에서 관리합니다.
 
 ## 배포
 

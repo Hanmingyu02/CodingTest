@@ -33,9 +33,14 @@
       return `<section class="note-group"><h2>${category.title}<span>${grouped.length}</span></h2><div class="note-grid">${grouped.map(note => `<a class="note-card" href="#note/${encodeURIComponent(note.id)}"><span class="note-category">${category.title}</span><h3>${escape(note.title)}</h3><p>${escape(note.description)}</p><span class="note-open">노트 열기 ↗</span></a>`).join('')}</div></section>`;
     }).join('');
   }
+  function relatedNotes(note) {
+    const related = [...new Set(note.related || [])].map(id => notes.find(item => item.id === id)).filter(item => item && item.id !== note.id);
+    if (!related.length) return '';
+    return `<aside class="related-notes" aria-labelledby="related-title"><h2 id="related-title">관련 노트</h2><div>${related.map(item => `<a href="#note/${encodeURIComponent(item.id)}"><span>${escape(item.title)}</span><span aria-hidden="true">↗</span></a>`).join('')}</div></aside>`;
+  }
   function noteDetail(note) {
     const category = categories.find(item => item.id === note.category);
-    return `<div class="detail-page"><a class="back-link" href="#${category.id}">← ${category.title}</a><div class="page-heading"><div class="eyebrow">${category.english.toUpperCase()}</div><h1>${escape(note.title)}</h1><p>${escape(note.description)}</p></div>${note.code ? `<section class="code-panel"><header><span>Python</span><button data-copy="${escape(note.id)}">코드 복사</button></header><pre><code>${escape(note.code)}</code></pre></section>` : ''}${note.text ? `<p class="note-text">${escape(note.text)}</p>` : ''}</div>`;
+    return `<div class="detail-page"><a class="back-link" href="#${category.id}">← ${category.title}</a><div class="page-heading"><div class="eyebrow">${category.english.toUpperCase()}</div><h1>${escape(note.title)}</h1><p>${escape(note.description)}</p></div>${note.code ? `<section class="code-panel"><header><span>Python</span><button data-copy="${escape(note.id)}">코드 복사</button></header><pre><code>${escape(note.code)}</code></pre></section>` : ''}${note.text ? `<p class="note-text">${escape(note.text)}</p>` : ''}${relatedNotes(note)}</div>`;
   }
   function render() {
     const route = location.hash.slice(1) || 'home';

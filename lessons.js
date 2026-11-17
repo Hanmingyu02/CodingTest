@@ -94,7 +94,30 @@ window.NOTEBOOK = {
     "category": "algorithm",
     "description": "(우선순위, 원래 인덱스)를 큐에 저장하고 if Q와 max(Q)[0]으로 남은 항목을 확인합니다.",
     "code": "Q = []\nfor i in range(len(priorities)):\n    Q.append((priorities[i], i))\n\nwhile Q:\n    priority, idx = Q.pop(0)\n    if Q and priority < max(Q)[0]:\n        Q.append((priority, idx))",
-    "text": "큐 사용: 먼저 들어온 항목을 먼저 꺼내는 구조입니다. 이 코드는 리스트를 큐처럼 사용하며, append()로 맨 뒤에 넣고 pop(0)으로 맨 앞 항목을 꺼냅니다. 다시 넣지 않은 항목은 큐에서 빠진 상태로 처리됩니다.\n\n인덱스 추적: (priorities[i], i)는 (우선순위, 원래 인덱스) 튜플입니다. priority, idx = Q.pop(0)은 꺼낸 튜플을 두 변수에 나누어 담습니다. 큐의 순서가 바뀌어도 idx는 원래 위치이므로 idx == location으로 목표 항목인지 확인할 수 있습니다.\n\nif Q / while Q: Q에 요소가 있으면 참, 빈 리스트이면 거짓입니다. while Q는 큐가 빌 때까지 반복합니다.\n\nmax(Q)[0]: max(Q)는 우선순위가 가장 큰 튜플을 찾고, [0]은 그 튜플의 첫 번째 값인 우선순위를 가져옵니다. 우선순위가 같으면 두 번째 값인 인덱스도 비교하지만, 가져오는 우선순위는 같습니다. Q의 첫 항목을 의미하는 것은 아닙니다.\n\nif Q and priority < max(Q)[0]: 방금 꺼낸 항목보다 높은 우선순위가 남아 있는지 검사합니다. and는 앞 조건이 거짓이면 뒤를 계산하지 않으므로, 빈 큐에서 max(Q)를 호출해 생기는 ValueError를 피합니다.\n\nQ.append((priority, idx)): 더 높은 우선순위가 남아 있으면 원래 인덱스를 그대로 유지한 채 맨 뒤로 보냅니다. 같은 우선순위만 남아 있으면 뒤로 보내지 않습니다."
+    "text": "큐 사용: 먼저 들어온 항목을 먼저 꺼내는 구조입니다. 이 코드는 리스트를 큐처럼 사용하며, append()로 맨 뒤에 넣고 pop(0)으로 맨 앞 항목을 꺼냅니다. 다시 넣지 않은 항목은 큐에서 빠진 상태로 처리됩니다.\n\n인덱스 추적: (priorities[i], i)는 (우선순위, 원래 인덱스) 튜플입니다. priority, idx = Q.pop(0)은 꺼낸 튜플을 두 변수에 나누어 담습니다. 큐의 순서가 바뀌어도 idx는 원래 위치이므로 idx == location으로 목표 항목인지 확인할 수 있습니다.\n\nif Q / while Q: Q에 요소가 있으면 참, 빈 리스트이면 거짓입니다. while Q는 큐가 빌 때까지 반복합니다.\n같은 방식으로 gotruck and gotruck[0][1] >= bridge_length는 gotruck이 비어 있지 않을 때만 맨 앞 트럭의 경과 시간을 비교합니다. 빈 리스트이면 뒤의 인덱스 접근을 건너뛰어 IndexError를 피합니다.\n\nmax(Q)[0]: max(Q)는 우선순위가 가장 큰 튜플을 찾고, [0]은 그 튜플의 첫 번째 값인 우선순위를 가져옵니다. 우선순위가 같으면 두 번째 값인 인덱스도 비교하지만, 가져오는 우선순위는 같습니다. Q의 첫 항목을 의미하는 것은 아닙니다.\n\nif Q and priority < max(Q)[0]: 방금 꺼낸 항목보다 높은 우선순위가 남아 있는지 검사합니다. and는 앞 조건이 거짓이면 뒤를 계산하지 않으므로, 빈 큐에서 max(Q)를 호출해 생기는 ValueError를 피합니다.\n\nQ.append((priority, idx)): 더 높은 우선순위가 남아 있으면 원래 인덱스를 그대로 유지한 채 맨 뒤로 보냅니다. 같은 우선순위만 남아 있으면 뒤로 보내지 않습니다."
+  },
+  {
+    "id": "nested-list-access-sum",
+    "title": "2차원 리스트 접근과 값의 합계",
+    "category": "array",
+    "description": "[행][열]로 저장된 값에 접근하고, 각 행의 특정 값을 모아 합계를 구합니다.",
+    "code": "gotruck[0][0]  # 첫 번째 트럭의 무게\ngotruck[0][1]  # 첫 번째 트럭의 경과 시간\ngotruck[i][1] += 1  # i번째 트럭의 경과 시간 증가\n\nsumnum = sum([truck[0] for truck in gotruck])",
+    "text": "자료 구조: gotruck에는 트럭별로 [무게, 경과 시간] 리스트를 저장합니다. 바깥 인덱스는 트럭을, 안쪽 인덱스는 그 트럭의 정보를 고릅니다.\n\ngotruck[0][1]: 먼저 gotruck[0]으로 맨 앞 트럭을 선택하고, 그 안의 [1]로 두 번째 값인 경과 시간을 가져옵니다. gotruck[i][1] += 1은 해당 트럭의 경과 시간을 1 늘립니다.\n\n리스트 컴프리헨션: [truck[0] for truck in gotruck]은 각 트럭의 첫 번째 값인 무게를 모은 새 리스트입니다. 여기에 sum()을 적용하면 다리 위 전체 무게가 됩니다. gotruck이 비었으면 합계는 0입니다.\n\n인덱스 접근은 해당 트럭이 있을 때 사용합니다. 빈 리스트를 먼저 확인하는 gotruck and ...의 동작은 아래 기존 큐 노트에서 함께 설명합니다.",
+    "related": [
+      "queue-index-priority"
+    ]
+  },
+  {
+    "id": "bridge-time-simulation",
+    "title": "시간 단위 시뮬레이션과 큐",
+    "category": "algorithm",
+    "description": "시간을 한 단계씩 진행하며 이동·퇴장·진입 순서로 상태를 갱신합니다.",
+    "code": "time += 1\nfor truck in gotruck:\n    truck[1] += 1\n\nif gotruck and gotruck[0][1] >= bridge_length:\n    struck.append(gotruck.pop(0))\n\nsumnum = sum([truck[0] for truck in gotruck])\nif truck_weights and sumnum + truck_weights[0] <= weight:\n    gotruck.append([truck_weights.pop(0), 0])",
+    "text": "알고리즘: 시간을 1씩 늘리며 실제 상황의 상태 변화를 그대로 구현하는 시뮬레이션입니다. 트럭은 입력 순서를 유지하며 큐 방식으로 이동합니다. 코드는 한 초 동안의 상태 갱신 부분만 정리했습니다.\n\n상태 구분: truck_weights는 대기 중인 트럭, gotruck은 다리 위 트럭과 각 경과 시간, struck은 통과한 트럭을 저장합니다.\n\n한 초의 처리 순서: ① 다리 위 트럭의 시간 증가 → ② 맨 앞 트럭의 퇴장 확인 → ③ 남은 무게 합산 → ④ 다음 트럭의 진입 확인. 퇴장을 먼저 반영해야 빠진 무게만큼 새 트럭을 올릴 수 있습니다.\n\n경과 시간: 진입할 때 0으로 저장하고 다음 초부터 증가시킵니다. 맨 앞 트럭의 경과 시간이 bridge_length 이상이면 다리에서 내립니다. 매초 새 트럭은 최대 한 대만 진입합니다.\n\n종료 조건: 처음 트럭 수를 저장해 두고, 통과한 트럭 수가 그 수와 같아질 때까지 반복합니다. 대기 트럭이 없어도 다리 위 트럭이 모두 나갈 때까지 시간을 진행해야 합니다.\n\n이미 정리한 큐의 삽입·꺼내기와 빈 큐 검사, 새로 정리한 중첩 인덱스와 합계는 아래 관련 노트로 연결했습니다.",
+    "related": [
+      "nested-list-access-sum",
+      "queue-index-priority"
+    ]
   }
 ]
 };

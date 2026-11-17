@@ -19,4 +19,7 @@ for note in notes:
     assert note['category'] in {item['id'] for item in categories}
     assert isinstance(note.get('code', ''), str)
     assert isinstance(note.get('text', ''), str)
+    related = note.get('related', [])
+    assert isinstance(related, list) and len(related) == len(set(related))
+    assert all(target != note['id'] and target in {item['id'] for item in notes} for target in related)
 print(f'PASS: exactly five requested categories; {len(notes)} user notes')

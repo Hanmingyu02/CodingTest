@@ -14,3 +14,10 @@ a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:poi
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
 
 @media(max-width:800px){.sidebar{visibility:hidden}.menu-open .sidebar{visibility:visible}}
+
+.related-notes{border-top:1px solid var(--line);margin-top:32px;padding-top:23px}
+.related-notes h2{font-size:14px;font-weight:600;margin:0 0 12px}
+.related-notes>div{display:grid;gap:9px}
+.related-notes a{display:flex;justify-content:space-between;align-items:center;gap:15px;background:white;border:1px solid var(--line);border-radius:8px;padding:14px 17px;font-size:12px;color:#7180ac}
+.related-notes a:hover{border-color:#a8b2e1;background:#f3f5ff}
+.related-notes a>span:last-child{flex-shrink:0;color:#a3afd1}
