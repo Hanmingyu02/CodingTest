@@ -272,6 +272,53 @@ window.NOTEBOOK = {
         "application": "마지막 트럭이 다리를 빠져나오는 시점처럼, 대기와 진행 상태를 모두 고려해 종료해야 할 때 활용합니다."
       }
     ]
+  },
+  {
+    "id": "heapq-min-heap",
+    "title": "heapq로 최소 힙 사용하기",
+    "category": "algorithm",
+    "description": "가장 작은 값을 반복해서 확인하고 꺼낼 때 쓰는 최소 힙의 사용법입니다.",
+    "usages": [
+      {
+        "title": "모듈 가져오기와 빈 힙 준비",
+        "code": "import heapq\nheap = []",
+        "meaning": "heapq는 파이썬 표준 라이브러리이므로 별도 설치 없이 가져옵니다. 빈 리스트를 만들고 heappush()로 값을 추가하며 사용할 수 있습니다.",
+        "application": "아직 값이 없는 상태에서 최소 힙에 데이터를 하나씩 넣기 시작할 때 사용합니다."
+      },
+      {
+        "title": "기존 리스트를 힙으로 바꾸기",
+        "code": "heapq.heapify(heap)",
+        "meaning": "값이 들어 있는 리스트 원본을 최소 힙으로 바꿉니다. 반환값은 None이며, 처리 시간은 원소 수 N에 대해 O(N)입니다.",
+        "application": "scoville처럼 이미 주어진 숫자 리스트를 힙으로 사용하고 싶을 때 한 번 실행합니다."
+      },
+      {
+        "title": "최소값 확인하기",
+        "code": "heap[0]",
+        "meaning": "비어 있지 않은 최소 힙의 최솟값을 제거하지 않고 O(1)에 확인합니다. 전체 원소가 정렬된 것은 아니므로 다른 인덱스를 정렬 순서로 해석하지 않습니다.",
+        "application": "가장 작은 값이 목표값 K에 도달했는지 검사할 때 사용합니다. 빈 힙에서 접근하면 IndexError가 발생하므로 요소가 있는지 먼저 확인합니다."
+      },
+      {
+        "title": "최소값 꺼내기",
+        "code": "value = heapq.heappop(heap)",
+        "meaning": "최솟값을 제거해 반환하고 나머지 원소의 힙 구조를 유지합니다. 처리 시간은 O(log N)이며, 빈 힙에서는 IndexError가 발생합니다.",
+        "application": "가장 작은 값을 꺼내서 계산하거나 우선 처리할 때 사용합니다."
+      },
+      {
+        "title": "새 값 추가하기",
+        "code": "heapq.heappush(heap, value)",
+        "meaning": "힙에 value를 넣고 최소 힙 구조를 유지합니다. 리스트 원본이 바뀌며 처리 시간은 O(log N)입니다.",
+        "application": "작은 값들을 이용해 만든 새 값을 다시 넣고, 다음 최솟값을 구하는 작업을 반복할 때 사용합니다."
+      },
+      {
+        "title": "가장 작은 두 값 꺼내기",
+        "code": "if len(heap) >= 2:\n    a = heapq.heappop(heap)\n    b = heapq.heappop(heap)",
+        "meaning": "원소가 두 개 이상인지 확인한 뒤 heappop()을 두 번 호출합니다. a는 가장 작은 값, b는 그다음 작은 값이며 같은 값일 수도 있습니다.",
+        "application": "가장 작은 두 값으로 새 값을 만드는 연산에 활용합니다. 목표 미달인데 원소가 두 개보다 적으면 더 이상 결합할 수 없으므로 실패 처리가 필요합니다."
+      }
+    ],
+    "related": [
+      "queue-index-priority"
+    ]
   }
 ]
 };
