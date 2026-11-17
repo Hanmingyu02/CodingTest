@@ -17,8 +17,10 @@ assert len({note['id'] for note in notes}) == len(notes)
 for note in notes:
     assert note['id'] and note['title']
     assert note['category'] in {item['id'] for item in categories}
-    assert isinstance(note.get('code', ''), str)
-    assert isinstance(note.get('text', ''), str)
+    assert isinstance(note['usages'], list) and note['usages']
+    for usage in note['usages']:
+        assert usage['title'] and usage['meaning'] and usage['application']
+        assert isinstance(usage.get('code', ''), str)
     related = note.get('related', [])
     assert isinstance(related, list) and len(related) == len(set(related))
     assert all(target != note['id'] and target in {item['id'] for item in notes} for target in related)

@@ -38,9 +38,12 @@
     if (!related.length) return '';
     return `<aside class="related-notes" aria-labelledby="related-title"><h2 id="related-title">관련 노트</h2><div>${related.map(item => `<a href="#note/${encodeURIComponent(item.id)}"><span>${escape(item.title)}</span><span aria-hidden="true">↗</span></a>`).join('')}</div></aside>`;
   }
+  function usageCards(note) {
+    return `<div class="usage-list">${note.usages.map((usage, index) => `<section class="usage-card"><div class="usage-heading"><span>${String(index + 1).padStart(2, '0')}</span><h2>${escape(usage.title)}</h2></div>${usage.code ? `<div class="code-panel"><header><span>사용 구문</span><button data-copy-note="${escape(note.id)}" data-copy-usage="${index}" aria-label="${escape(usage.title)} 구문 복사">구문 복사</button></header><pre><code>${escape(usage.code)}</code></pre></div>` : ''}<dl class="usage-explanation"><div><dt>사용법</dt><dd>${escape(usage.meaning)}</dd></div><div><dt>활용</dt><dd>${escape(usage.application)}</dd></div></dl></section>`).join('')}</div>`;
+  }
   function noteDetail(note) {
     const category = categories.find(item => item.id === note.category);
-    return `<div class="detail-page"><a class="back-link" href="#${category.id}">← ${category.title}</a><div class="page-heading"><div class="eyebrow">${category.english.toUpperCase()}</div><h1>${escape(note.title)}</h1><p>${escape(note.description)}</p></div>${note.code ? `<section class="code-panel"><header><span>Python</span><button data-copy="${escape(note.id)}">코드 복사</button></header><pre><code>${escape(note.code)}</code></pre></section>` : ''}${note.text ? `<p class="note-text">${escape(note.text)}</p>` : ''}${relatedNotes(note)}</div>`;
+    return `<div class="detail-page"><a class="back-link" href="#${category.id}">← ${category.title}</a><div class="page-heading"><div class="eyebrow">${category.english.toUpperCase()}</div><h1>${escape(note.title)}</h1><p>${escape(note.description)}</p></div>${usageCards(note)}${relatedNotes(note)}</div>`;
   }
   function render() {
     const route = location.hash.slice(1) || 'home';
@@ -57,7 +60,7 @@
     else $('.overview-link').removeAttribute('aria-current');
     $('#category-nav').innerHTML = categories.map(item => `<a class="category-link ${item.color} ${activeCategory?.id === item.id ? 'active' : ''}" href="#${item.id}" ${activeCategory?.id === item.id ? 'aria-current="page"' : ''}><span class="nav-icon" aria-hidden="true">${item.icon}</span>${item.title}<span class="nav-count">${count(item.id)}</span></a>`).join('');
     if (note) { $('#main').innerHTML = noteDetail(note); return; }
-    const visible = notes.filter(item => (!category || item.category === category.id) && `${item.title} ${item.description || ''} ${item.text || ''} ${item.code || ''}`.toLocaleLowerCase().includes(query.toLocaleLowerCase()));
+    const visible = notes.filter(item => (!category || item.category === category.id) && `${item.title} ${item.description || ''} ${item.usages.map(usage => `${usage.title} ${usage.code} ${usage.meaning} ${usage.application}`).join(' ')}`.toLocaleLowerCase().includes(query.toLocaleLowerCase()));
     const title = query ? '검색 결과' : category ? category.title : '나의 코딩테스트 노트';
     $('#main').innerHTML = `<section class="page-heading"><div class="eyebrow">${query ? 'SEARCH YOUR NOTES' : category ? category.english.toUpperCase() : 'MY PYTHON NOTEBOOK'}</div><div class="heading-line"><div><h1>${title}${category ? '<span class="heading-dot">.</span>' : ''}</h1><p>${query ? `“${escape(query)}” 검색 결과 ${visible.length}개` : category ? '기억해 두고 싶은 개념과 코드를 모아두는 공간.' : '필요한 순간, 바로 꺼내보는 나만의 코드 기록.'}</p></div><div class="notebook-summary"><div><strong>${notes.length}</strong><span>저장된 노트</span></div><i></i><div><strong>5</strong><span>카테고리</span></div></div></div></section>${!category && !query ? `<section class="categories-section" aria-labelledby="categories-title"><div class="section-heading"><h2 id="categories-title">카테고리</h2><span>나에게 필요한 주제부터</span></div><div class="category-grid">${categoryCards()}</div></section>` : ''}<section class="notes-section"><div class="section-heading"><h2>${query ? '찾은 노트' : category ? `${category.title} 노트` : '모든 노트'}<span class="count-pill">${visible.length}</span></h2><span>${query ? '검색' : '기록'} ${visible.length}개</span></div>${visible.length ? noteList(visible) : emptyState(category, query)}</section>`;
   }
@@ -69,12 +72,13 @@
       $('#search').value = '';
       if (location.hash !== '#home') location.hash = 'home'; else render();
     }
-    const button = event.target.closest('[data-copy]');
+    const button = event.target.closest('[data-copy-note]');
     if (button) {
-      const note = notes.find(item => item.id === button.dataset.copy);
-      if (!note?.code) return;
-      try { await navigator.clipboard.writeText(note.code); toast('코드를 복사했어요.'); }
-      catch { toast('코드를 선택해 직접 복사해 주세요.'); }
+      const note = notes.find(item => item.id === button.dataset.copyNote);
+      const usage = note?.usages[Number(button.dataset.copyUsage)];
+      if (!usage?.code) return;
+      try { await navigator.clipboard.writeText(usage.code); toast('사용 구문을 복사했어요.'); }
+      catch { toast('구문을 선택해 직접 복사해 주세요.'); }
     }
   });
   $('#search').addEventListener('input', () => {
